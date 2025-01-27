@@ -6,7 +6,7 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:33:57 by juportie          #+#    #+#             */
-/*   Updated: 2025/01/24 16:32:58 by juportie         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:13:54 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct	s_img_data {
 	int	endian;
 }	t_img_data;
 
-void	pixel_put(t_img_data *img_data, int x, int y, int color)
+static void	pixel_put(t_img_data *img_data, int x, int y, int color)
 {
 	char	*pix_addr;
 
