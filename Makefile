@@ -7,6 +7,7 @@ MLX_DIR := ./minilibx
 MLX_FLAGS := -lmlx -lXext -lX11 -L$(MLX_DIR)
 LIBFT_DIR := ./libft
 LIBFT_FLAGS := -lft -L$(LIBFT_DIR)
+MATH_FLAGS := -lm
 
 NAME := fdf
 
@@ -26,10 +27,10 @@ mlx:
 	make -C $(MLX_DIR)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@ $(LIBFT_FLAGS) $(MLX_FLAGS)
+	$(CC) $(CFLAGS) $^ -o $@ $(LIBFT_FLAGS) $(MLX_FLAGS) $(MATH_FLAGS)
 
 %.o: %.c Makefile $(HEADER)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) -c $< -o $@
 
 clean:
 	rm -f $(OBJ)
