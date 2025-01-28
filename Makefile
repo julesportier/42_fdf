@@ -1,9 +1,11 @@
 CC := cc
 CFLAGS := -Wall -Werror -Wextra
+CFLAGS_DB := -Wall -Werror -Wextra -g3
+CFLAGS_NE := -g3
 
 MLX_DIR := ./minilibx
 MLX_FLAGS := -lmlx -lXext -lX11 -L$(MLX_DIR)
-LIBFT_DIR := ./libft/
+LIBFT_DIR := ./libft
 LIBFT_FLAGS := -lft -L$(LIBFT_DIR)
 
 NAME := fdf
@@ -14,6 +16,10 @@ OBJ := $(SRC:%.c=%.o)
 
 
 all: libft mlx $(NAME)
+no_error: CFLAGS = $(CFLAGS_NE)
+no_error: libft mlx $(NAME)
+debug: CFLAGS = $(CFLAGS_DB)
+debug: libft mlx $(NAME)
 libft:
 	make -C $(LIBFT_DIR)
 mlx:
@@ -40,4 +46,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all fdf libft mlx clean fclean re
+.PHONY: all fdf libft mlx clean fclean re no_error debug
