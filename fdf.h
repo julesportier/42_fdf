@@ -16,6 +16,11 @@
 # include "libft/libft.h"
 # include "libft/ftpf_printf.h"
 # include "minilibx/mlx.h"
+# include <math.h>
+// ALLOWED ?
+# include <stdlib.h>
+// DEBUG
+# include <stdio.h>
 
 # define WIDTH 1920
 # define HEIGHT 1080
@@ -28,9 +33,20 @@ typedef struct	s_img_data {
 	int	endian;
 }	t_img_data;
 
+typedef struct	s_pixel {
+	int	x;
+	int	y;
+	int	color;
+}	t_pixel;
+
 typedef struct	s_pos {
 	int	x;
 	int	y;
 }	t_pos;
+
+typedef struct	s_pos_d {
+	double	x;
+	double	y;
+}	t_pos_d;
 
 #endif
