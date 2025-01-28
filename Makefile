@@ -18,9 +18,9 @@ OBJ := $(SRC:%.c=%.o)
 
 all: libft mlx $(NAME)
 no_error: CFLAGS = $(CFLAGS_NE)
-no_error: libft mlx $(NAME)
+no_error: all
 debug: CFLAGS = $(CFLAGS_DB)
-debug: libft mlx $(NAME)
+debug: all
 libft:
 	make -C $(LIBFT_DIR)
 mlx:
