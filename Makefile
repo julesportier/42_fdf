@@ -28,12 +28,15 @@ $(NAME): $(OBJ)
 clean:
 	rm -f $(OBJ)
 	make clean -C $(LIBFT_DIR)
-	make clean -C $(MLX_DIR)
+	rm -rf $(MLX_DIR)/obj
+	rm -f $(MLX_DIR)/test/main.o
 
 fclean: clean
 	rm -f $(NAME)
 	make fclean -C $(LIBFT_DIR)
-	rm $(MLX_DIR)/Makefile.gen
+	make clean -C $(MLX_DIR)
+	rm -f $(MLX_DIR)/Makefile.gen
+	rm -f $(MLX_DIR)/test/Makefile.gen
 
 re: fclean all
 
