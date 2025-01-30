@@ -20,17 +20,17 @@ Input coordinates:
 |   -1   |
 ----------
 */
-static t_pos	scale_pixel(double x, double y, int width, int height)
-{
-	t_pos	pixel;
-
-	x = (x + 1) * 0.5;
-	y = (y + 1) * 0.5;
-	pixel.x = x * width;
-	pixel.y = y * height;
-	return (pixel);
-}
-
+//static t_pos	scale_pixel(double x, double y, int width, int height)
+//{
+//	t_pos	pixel;
+//
+//	x = (x + 1) * 0.5;
+//	y = (y + 1) * 0.5;
+//	pixel.x = x * width;
+//	pixel.y = y * height;
+//	return (pixel);
+//}
+//
 //static void	put_pixel(t_img_data *img_data, int x, int y, int color)
 //{
 //	char	*pix_addr;
@@ -119,17 +119,19 @@ static void	put_square(t_img_data *img_data, t_pixel pixel, int size)
 	}
 }
 
-static void	draw_line(t_img_data *img_data, t_pixel pixel, t_pos_d pos_a, t_pos_d pos_b)
+static void	draw_line(t_img_data *img_data, t_pixel pix_a, t_pixel pix_b)
 {
 	int	step_nbr;
 	double	x_step;
 	double	y_step;
 	int	i;
 
-	if (ft_memcmp(&pos_a, &pos_b, sizeof(t_pos_d)) == 0)
+	// FIX: if two pixels share the same position
+	// but not the same color this check doesn't work.
+	if (ft_memcmp(&pix_a, &pix_b, sizeof(t_pixel)) == 0)
 		return;
-	x_step = pos_b.x - pos_a.x;
-	y_step = pos_b.y - pos_a.y;
+	x_step = pix_b.x - pix_a.x;
+	y_step = pix_b.y - pix_a.y;
 	if (fabs(x_step) >= fabs(y_step))
 		step_nbr = fabs(x_step);
 	else
@@ -139,11 +141,11 @@ static void	draw_line(t_img_data *img_data, t_pixel pixel, t_pos_d pos_a, t_pos_
 	i = 0;
 	while (i <= step_nbr)
 	{
-		printf("x[%d] == %ld\n", i, lround(pos_a.x + i * x_step));
-		printf("y[%d] == %ld\n", i, lround(pos_a.y + i * y_step));
-		pixel.x = roundf(pos_a.x + i * x_step);
-		pixel.y = roundf(pos_a.y + i * y_step);
-		put_pixel(img_data, pixel);
+		printf("x[%d] == %ld\n", i, lround(pix_a.x + i * x_step));
+		printf("y[%d] == %ld\n", i, lround(pix_a.y + i * y_step));
+		pix_b.x = roundf(pix_a.x + i * x_step);
+		pix_b.y = roundf(pix_a.y + i * y_step);
+		put_pixel(img_data, pix_b);
 		i++;
 	}
 }
@@ -153,7 +155,6 @@ int	main(void)
 	void	*mlx;
 	void	*mlx_win;
 	t_img_data	img_data;
-	t_pixel	pixel;
 
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "HELLO");
@@ -164,10 +165,9 @@ int	main(void)
 		&img_data.line_length,
 		&img_data.endian
 	);
-	t_pos_d	pos_a = { .x = 10, .y = 81 };
-	t_pos_d	pos_b = { .x = 1920, .y = 1001 };
-	pixel.color = 0x00FF0000;
-	draw_line(&img_data, pixel, pos_a, pos_b);
+	t_pixel	pix_a = { .x = 10, .y = 81, .color = 0x00FF0000 };
+	t_pixel	pix_b = { .x = 1920, .y = 1001, .color = 0x00FF0000 };
+	draw_line(&img_data, pix_a, pix_b);
 	mlx_put_image_to_window(mlx, mlx_win, img_data.img, 0, 0);
 	mlx_loop(mlx);
 }
