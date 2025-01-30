@@ -9,6 +9,7 @@
 ### general
 - [Bresenham's line algorithm](https://en.wikipedia.org/wiki/Bresenham's_line_algorithm)
 - [Interpolation](https://en.wikipedia.org/wiki/Interpolation)
+- [Isometric projection implementation](https://www.compuphase.com/axometr.htm#CARTESIO)
 ### minilibx
 - [harm-smits docs](https://harm-smits.github.io/42docs/libs/minilibx.html)
 - compile with `ccw test.c -lmlx -lXext -lX11 -L ./minilibx`
