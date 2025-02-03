@@ -11,6 +11,10 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "libft/libft.h"
+#include "minilibx/mlx.h"
+#include <math.h>
+//#include "libft/ftpf_printf.h"
 
 /*
 Input coordinates:

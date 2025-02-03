@@ -13,15 +13,6 @@
 #ifndef FDF_H
 # define FDF_H
 
-# include "libft/libft.h"
-# include "libft/ftpf_printf.h"
-# include "minilibx/mlx.h"
-# include <math.h>
-// ALLOWED ?
-# include <stdlib.h>
-// DEBUG
-# include <stdio.h>
-
 # define WIDTH 1920
 # define HEIGHT 1080
 
