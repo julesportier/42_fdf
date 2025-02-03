@@ -17,6 +17,7 @@ OBJ := $(SRC:%.c=%.o)
 
 
 all: libft mlx $(NAME)
+
 no_error: CFLAGS = $(CFLAGS_NE)
 no_error: all
 debug: CFLAGS = $(CFLAGS_DB)
@@ -27,7 +28,7 @@ mlx:
 	make -C $(MLX_DIR)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@ $(LIBFT_FLAGS) $(MLX_FLAGS) $(MATH_FLAGS)
+	$(CC) $(CFLAGS) $? -o $@ $(LIBFT_FLAGS) $(MLX_FLAGS) $(MATH_FLAGS)
 
 %.o: %.c Makefile $(HEADER)
 	$(CC) -c $< -o $@
@@ -47,4 +48,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all fdf libft mlx clean fclean re no_error debug
+.PHONY: all libft mlx clean fclean re no_error debug
