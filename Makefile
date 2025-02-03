@@ -29,7 +29,7 @@ mlx:
 	make -C $(MLX_DIR)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $? -o $@ $(LIBFT_FLAGS) $(MLX_FLAGS) $(MATH_FLAGS)
+	$(CC) $(CFLAGS) $^ -o $@ $(LIBFT_FLAGS) $(MLX_FLAGS) $(MATH_FLAGS)
 
 %.o: %.c Makefile $(HEADER)
 	$(CC) -c $< -o $@
