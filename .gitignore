@@ -3,3 +3,4 @@
 *.gch
 *.a
 fdf
+compile_commands.json
