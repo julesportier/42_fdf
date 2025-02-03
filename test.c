@@ -15,6 +15,8 @@
 #include "minilibx/mlx.h"
 #include <math.h>
 //#include "libft/ftpf_printf.h"
+//DEBUG
+#include <stdio.h>
 
 /*
 Input coordinates:
