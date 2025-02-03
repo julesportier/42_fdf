@@ -6,12 +6,12 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:55:06 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/03 17:55:11 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:13:29 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "libft/libft.h"
+//#include "libft/libft.h"
 #include <math.h>
 //#include "libft/ftpf_printf.h"
 //DEBUG
@@ -34,9 +34,7 @@ void	draw_line(t_img_data *img_data, t_pixel pix_a, t_pixel pix_b)
 	double	y_step;
 	int	i;
 
-	// FIX: if two pixels share the same position
-	// but not the same color this check doesn't work.
-	if (ft_memcmp(&pix_a, &pix_b, sizeof(t_pixel)) == 0)
+	if (pix_a.x == pix_b.x && pix_a.y == pix_b.y)
 		return;
 	x_step = pix_b.x - pix_a.x;
 	y_step = pix_b.y - pix_a.y;
