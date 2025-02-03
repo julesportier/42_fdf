@@ -12,7 +12,8 @@ MATH_FLAGS := -lm
 NAME := fdf
 
 HEADER := fdf.h
-SRC := test.c
+SRC := test.c \
+       draw.c
 OBJ := $(SRC:%.c=%.o)
 
 
