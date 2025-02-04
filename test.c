@@ -14,7 +14,7 @@
 //#include "libft/libft.h"
 #include "minilibx/mlx.h"
 //#include <math.h>
-//#include "libft/ftpf_printf.h"
+#include "libft/ftpf_printf.h"
 //DEBUG
 //#include <stdio.h>
 
@@ -122,6 +122,10 @@ int	main(void)
 	void	*mlx_win;
 	t_img_data	img_data;
 
+	int	fd = get_fd("test.fdf");
+	t_grid_data	grid = get_grid_size(fd);
+	ft_printf("grid.width == %d\n", grid.width);
+	ft_printf("grid.height == %d\n", grid.height);
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "HELLO");
 	img_data.img = mlx_new_image(mlx, WIDTH, HEIGHT);

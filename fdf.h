@@ -30,11 +30,17 @@ typedef struct	s_pixel {
 	int	color;
 }	t_pixel;
 
+typedef struct	s_grid_data {
+	int	width;
+	int	height;
+}	t_grid_data;
+
 // DRAW
 void	put_pixel(t_img_data *img_data, t_pixel pixel);
 void	draw_line(t_img_data *img_data, t_pixel pix_a, t_pixel pix_b);
 // PARSING
 int	get_fd(char *filename);
+t_grid_data	get_grid_size(int fd);
 
 
 //typedef struct	s_pos {
