@@ -30,8 +30,13 @@ typedef struct	s_pixel {
 	int	color;
 }	t_pixel;
 
+// DRAW
 void	put_pixel(t_img_data *img_data, t_pixel pixel);
 void	draw_line(t_img_data *img_data, t_pixel pix_a, t_pixel pix_b);
+// PARSING
+int	get_fd(char *filename);
+
+
 //typedef struct	s_pos {
 //	int	x;
 //	int	y;

@@ -13,6 +13,7 @@ NAME := fdf
 
 HEADER := fdf.h
 SRC := test.c \
+       parsing.c \
        draw.c
 OBJ := $(SRC:%.c=%.o)
 
