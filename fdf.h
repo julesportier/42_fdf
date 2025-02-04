@@ -6,7 +6,7 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:11:59 by juportie          #+#    #+#             */
-/*   Updated: 2025/01/27 15:33:28 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:04:44 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ typedef struct	s_grid_data {
 	int	height;
 }	t_grid_data;
 
+// UTILS
+int	ft_splitlen(char **splits);
+void	ft_err_exit(char *error);
+void	ft_err_free_exit(char *str, char *error);
+char	*remove_end_nl(char *str);
 // DRAW
 void	put_pixel(t_img_data *img_data, t_pixel pixel);
 void	draw_line(t_img_data *img_data, t_pixel pix_a, t_pixel pix_b);

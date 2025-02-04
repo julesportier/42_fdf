@@ -6,7 +6,7 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 07:13:27 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/04 07:50:33 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:04:42 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,39 +37,6 @@ int	get_fd(char *filename)
 	return (fd);
 }
 
-static int	ft_splitlen(char **splits)
-{
-	int	i;
-
-	i = 0;
-	if (splits != NULL)
-	{
-		while (splits[i])
-			i++;
-	}
-	return (i);
-}
-
-static void	ft_free_fail(char *str, char *error)
-{
-	free(str);
-	ft_putendl_fd(error, 2);
-	exit(EXIT_FAILURE);
-}
-
-static char	*remove_end_nl(char *str)
-{
-	int	len;
-
-	if (str)
-	{
-		len = ft_strlen(str);
-		if (str[len - 1] == '\n')
-			str[len - 1] = '\0';
-	}
-	return (str);
-}
-
 t_grid_data	get_grid_size(int fd)
 {
 	char	*line;
@@ -84,15 +51,15 @@ t_grid_data	get_grid_size(int fd)
 		if (line == NULL && grid.width != 0)
 			return (grid);
 		if (line == NULL && grid.width == 0)
-			ft_free_fail(NULL, "file is empty");
+			ft_err_exit("file is empty");
 		if (++grid.height < 0)
-			ft_free_fail(line, "line number overflow");
+			ft_err_free_exit(line, "line number overflow");
 		splits = ft_split(line, ' ');
 		if (splits == NULL)
-			ft_free_fail(line, "ft_split() error");
+			ft_err_free_exit(line, "ft_split() error");
 		temp = ft_splitlen(splits);
 		if (temp != grid.width && grid.width != 0)
-			ft_free_fail(line, "wrong file formating");
+			ft_err_free_exit(line, "wrong file formating");
 		grid.width = temp;
 		free(line);
 		line = NULL;
