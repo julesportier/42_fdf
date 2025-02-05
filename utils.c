@@ -32,9 +32,9 @@ void	ft_err_exit(char *error)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_err_free_exit(char *str, char *error)
+void	ft_err_free_exit(void *mem, char *error)
 {
-	free(str);
+	free(mem);
 	ft_putendl_fd(error, 2);
 	exit(EXIT_FAILURE);
 }

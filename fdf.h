@@ -38,7 +38,7 @@ typedef struct	s_grid_data {
 // UTILS
 int	ft_splitlen(char **splits);
 void	ft_err_exit(char *error);
-void	ft_err_free_exit(char *str, char *error);
+void	ft_err_free_exit(void *mem, char *error);
 char	*remove_end_nl(char *str);
 // DRAW
 void	put_pixel(t_img_data *img_data, t_pixel pixel);
