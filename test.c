@@ -127,8 +127,21 @@ int	main(void)
 	ft_printf("grid_data.width == %d\n", grid_data.width);
 	ft_printf("grid_data.height == %d\n", grid_data.height);
 	close(fd);
-	fd = get_fd("test.fdf");
 	int	**grid = malloc_grid(grid_data);
+	fd = get_fd("test.fdf");
+	fill_grid(grid, grid_data, fd);
+	close(fd);
+	int	i = 0;
+	while (i < grid_data.height)
+	{
+		int j = 0;
+		while (j < grid_data.width)
+		{
+			ft_printf("grid[%d][%d] == %d\n", i, j, grid[i][j]);
+			j++;
+		}
+		i++;
+	}
 	ft_err_free2d_exit(grid, grid_data.height, "free grid");
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "HELLO");

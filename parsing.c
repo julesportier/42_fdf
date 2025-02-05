@@ -91,3 +91,36 @@ int	**malloc_grid(t_grid_data grid_data)
 	}
 	return (grid);
 }
+
+void	fill_grid(int **grid, t_grid_data grid_data, int fd)
+{
+	int	r;
+	int	c;
+	char	*line;
+	char	**splits;
+
+	r = 0;
+	while (r < grid_data.height)
+	{
+		c = 0;
+		line = remove_end_nl(get_next_line(fd));
+		if (line == NULL)
+			ft_err_free2d_exit(
+				grid, grid_data.height, "fill_grid() error"
+			);
+		splits = ft_split(line, ' ');
+		free(line);
+		if (splits == NULL)
+		{
+			ft_free_splits(splits);
+			ft_err_exit("fill_grid() error");
+		}
+		while (c < grid_data.width)
+		{
+			grid[r][c] = ft_atoi(splits[c]);
+			c++;
+		}
+		ft_free_splits(splits);
+		r++;
+	}
+}
