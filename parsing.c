@@ -79,11 +79,10 @@ int	**malloc_grid(t_grid_data grid_data)
 	{
 		grid[i] = malloc(grid_data.width);
 		if (grid[i] == NULL)
-		{
-			while (--i >= 0)
-				free(grid[i]);
-			ft_err_free_exit((void *)grid, "subarray malloc() failed");
-		}
+			ft_err_free2d_exit(
+				(void **)grid, i,
+				"subarray malloc() failed"
+			);
 		i++;
 	}
 	return (grid);

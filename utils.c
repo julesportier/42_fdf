@@ -39,6 +39,15 @@ void	ft_err_free_exit(void *mem, char *error)
 	exit(EXIT_FAILURE);
 }
 
+void	ft_err_free2d_exit(void **mem, int sub_nbr, char *error)
+{
+	while (sub_nbr--)
+		free(mem[sub_nbr]);
+	free(mem);
+	ft_putendl_fd(error, 2);
+	exit(EXIT_FAILURE);
+}
+
 char	*remove_end_nl(char *str)
 {
 	int	len;
