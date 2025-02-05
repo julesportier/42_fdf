@@ -3,9 +3,11 @@ CFLAGS := -Wall -Werror -Wextra
 CFLAGS_DB := -Wall -Werror -Wextra -g3
 CFLAGS_NE := -g3
 
-MLX_DIR := ./minilibx
-MLX_FLAGS := -lmlx -lXext -lX11 -L$(MLX_DIR)
+LIBMLX_DIR := ./minilibx
+LIBMLX_AR := $(LIBMLX_DIR)/libmlx.a
+LIBMLX_FLAGS := -lmlx -lXext -lX11 -L$(LIBMLX_DIR)
 LIBFT_DIR := ./libft
+LIBFT_AR := $(LIBFT_DIR)/libft.a
 LIBFT_FLAGS := -lft -L$(LIBFT_DIR)
 MATH_FLAGS := -lm
 
@@ -28,26 +30,26 @@ debug: all
 libft:
 	make -C $(LIBFT_DIR)
 mlx:
-	make -C $(MLX_DIR)
+	make -C $(LIBMLX_DIR)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@ $(LIBFT_FLAGS) $(MLX_FLAGS) $(MATH_FLAGS)
+	$(CC) $(CFLAGS) $^ -o $@ $(LIBFT_FLAGS) $(LIBMLX_FLAGS) $(MATH_FLAGS)
 
-%.o: %.c Makefile $(HEADER)
+%.o: %.c Makefile $(HEADER) $(LIBFT_AR) $(LIBMLX_AR)
 	$(CC) -c $< -o $@
 
 clean:
 	rm -f $(OBJ)
 	make clean -C $(LIBFT_DIR)
-	rm -rf $(MLX_DIR)/obj
-	rm -f $(MLX_DIR)/test/main.o
+	rm -rf $(LIBMLX_DIR)/obj
+	rm -f $(LIBMLX_DIR)/test/main.o
 
 fclean: clean
 	rm -f $(NAME)
 	make fclean -C $(LIBFT_DIR)
-	make clean -C $(MLX_DIR)
-	rm -f $(MLX_DIR)/Makefile.gen
-	rm -f $(MLX_DIR)/test/Makefile.gen
+	make clean -C $(LIBMLX_DIR)
+	rm -f $(LIBMLX_DIR)/Makefile.gen
+	rm -f $(LIBMLX_DIR)/test/Makefile.gen
 
 re: fclean all
 
