@@ -65,3 +65,26 @@ t_grid_data	get_grid_size(int fd)
 		line = NULL;
 	}
 }
+
+int	**malloc_grid(t_grid_data grid_data)
+{
+	int	**grid;
+	int	i;
+
+	i = 0;
+	grid = malloc(grid_data.height);
+	if (grid == NULL)
+		perror("malloc() error");
+	while (i < grid_data.height)
+	{
+		grid[i] = malloc(grid_data.width);
+		if (grid[i] == NULL)
+		{
+			while (--i >= 0)
+				free(grid[i]);
+			ft_err_free_exit((void *)grid, "subarray malloc() failed");
+		}
+		i++;
+	}
+	return (grid);
+}

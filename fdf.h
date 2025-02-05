@@ -46,6 +46,7 @@ void	draw_line(t_img_data *img_data, t_pixel pix_a, t_pixel pix_b);
 // PARSING
 int	get_fd(char *filename);
 t_grid_data	get_grid_size(int fd);
+int	**malloc_grid(t_grid_data grid_data);
 
 
 //typedef struct	s_pos {

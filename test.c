@@ -123,9 +123,11 @@ int	main(void)
 	t_img_data	img_data;
 
 	int	fd = get_fd("test.fdf");
-	t_grid_data	grid = get_grid_size(fd);
-	ft_printf("grid.width == %d\n", grid.width);
-	ft_printf("grid.height == %d\n", grid.height);
+	t_grid_data	grid_data = get_grid_size(fd);
+	ft_printf("grid_data.width == %d\n", grid_data.width);
+	ft_printf("grid_data.height == %d\n", grid_data.height);
+	close(fd);
+	fd = get_fd("test.fdf");
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "HELLO");
 	img_data.img = mlx_new_image(mlx, WIDTH, HEIGHT);
