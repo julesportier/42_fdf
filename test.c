@@ -128,6 +128,8 @@ int	main(void)
 	ft_printf("grid_data.height == %d\n", grid_data.height);
 	close(fd);
 	fd = get_fd("test.fdf");
+	int	**grid = malloc_grid(grid_data);
+	ft_err_free2d_exit(grid, grid_data.height, "free grid");
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "HELLO");
 	img_data.img = mlx_new_image(mlx, WIDTH, HEIGHT);

@@ -56,10 +56,17 @@ t_grid_data	get_grid_size(int fd)
 			ft_err_free_exit(line, "line number overflow");
 		splits = ft_split(line, ' ');
 		if (splits == NULL)
+		{
+			ft_free_splits(splits);
 			ft_err_free_exit(line, "ft_split() error");
+		}
 		temp = ft_splitlen(splits);
 		if (temp != grid.width && grid.width != 0)
+		{
+			ft_free_splits(splits);
 			ft_err_free_exit(line, "wrong file formating");
+		}
+		ft_free_splits(splits);
 		grid.width = temp;
 		free(line);
 		line = NULL;
@@ -72,17 +79,14 @@ int	**malloc_grid(t_grid_data grid_data)
 	int	i;
 
 	i = 0;
-	grid = malloc(grid_data.height);
+	grid = malloc(grid_data.height * sizeof(int *));
 	if (grid == NULL)
 		perror("malloc() error");
 	while (i < grid_data.height)
 	{
-		grid[i] = malloc(grid_data.width);
+		grid[i] = malloc(grid_data.width * sizeof(int));
 		if (grid[i] == NULL)
-			ft_err_free2d_exit(
-				(void **)grid, i,
-				"subarray malloc() failed"
-			);
+			ft_err_free2d_exit(grid, i, "subarray malloc() failed");
 		i++;
 	}
 	return (grid);

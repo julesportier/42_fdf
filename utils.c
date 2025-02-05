@@ -26,6 +26,23 @@ int	ft_splitlen(char **splits)
 	return (i);
 }
 
+void	ft_free_splits(char **array)
+{
+	int	i;
+	char	**addr;
+
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		array[i] = NULL;
+		i++;
+	}
+	addr = array;
+	free(array);
+	array = NULL;
+}
+
 void	ft_err_exit(char *error)
 {
 	ft_putendl_fd(error, 2);
@@ -39,7 +56,7 @@ void	ft_err_free_exit(void *mem, char *error)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_err_free2d_exit(void **mem, int sub_nbr, char *error)
+void	ft_err_free2d_exit(int **mem, int sub_nbr, char *error)
 {
 	while (sub_nbr--)
 		free(mem[sub_nbr]);
