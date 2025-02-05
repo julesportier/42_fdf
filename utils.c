@@ -28,7 +28,7 @@ int	ft_splitlen(char **splits)
 
 void	ft_free_splits(char **array)
 {
-	int	i;
+	int		i;
 	char	**addr;
 
 	i = 0;

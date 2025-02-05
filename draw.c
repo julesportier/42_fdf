@@ -22,20 +22,21 @@ void	put_pixel(t_img_data *img_data, t_pixel pixel)
 	char	*pix_addr;
 
 	pix_addr = img_data->addr + (
-		pixel.y * img_data->line_length + pixel.x * (img_data->bits_per_pixel / 8)
-	);
+			pixel.y * img_data->line_length
+			+ pixel.x * (img_data->bits_per_pixel / 8)
+			);
 	*(unsigned int *)pix_addr = pixel.color;
 }
 
 void	draw_line(t_img_data *img_data, t_pixel pix_a, t_pixel pix_b)
 {
-	int	step_nbr;
+	int		step_nbr;
 	double	x_step;
 	double	y_step;
-	int	i;
+	int		i;
 
 	if (pix_a.x == pix_b.x && pix_a.y == pix_b.y)
-		return;
+		return ;
 	x_step = pix_b.x - pix_a.x;
 	y_step = pix_b.y - pix_a.y;
 	if (fabs(x_step) >= fabs(y_step))
