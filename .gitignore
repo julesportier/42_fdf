@@ -1,6 +1,10 @@
+# compilation output
 *.o
 *.out
 *.gch
 *.a
+# project specific
 fdf
+# bear output
 compile_commands.json
+.cache/
