@@ -39,29 +39,29 @@ int	get_fd(char *filename)
 
 t_grid_data	get_grid_size(int fd)
 {
-	t_grid_data	grid;
+	t_grid_data	grid_data;
 	char		*line;
 	char		**splits;
 	int			temp;
 
-	ft_bzero(&grid, sizeof(t_grid_data));
+	ft_bzero(&grid_data, sizeof(t_grid_data));
 	while (1)
 	{
 		line = remove_end_nl(get_next_line(fd));
-		if (line == NULL && grid.width != 0)
-			return (grid);
-		if (line == NULL && grid.width == 0)
+		if (line == NULL && grid_data.width != 0)
+			return (grid_data);
+		if (line == NULL && grid_data.width == 0)
 			ft_err_exit("file is empty");
-		if (++grid.height < 0)
+		if (++grid_data.height < 0)
 			ft_err_free_exit(line, "line number overflow");
 		splits = ft_split(line, ' ');
 		if (splits == NULL)
 			ft_err_free_exit(line, "ft_split() error");
 		temp = ft_splitlen(splits);
 		ft_free_splits(splits);
-		if (temp != grid.width && grid.width != 0)
+		if (temp != grid_data.width && grid_data.width != 0)
 			ft_err_free_exit(line, "wrong file formating");
-		grid.width = temp;
+		grid_data.width = temp;
 		free(line);
 	}
 }
