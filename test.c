@@ -6,7 +6,7 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:33:57 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/06 12:29:49 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/06 13:34:19 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ int	main(void)
 	ft_printf("grid spacing == %d\n", grid_data.spacing);
 	store_start_point(&grid_data);
 	ft_printf("start.x == %d\nstart.y == %d\n", grid_data.start_point.x, grid_data.start_point.y);
-	ft_err_free2d_exit(grid, grid_data.height, "free grid");
+	//ft_err_free2d_exit(grid, grid_data.height, "free grid");
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "HELLO");
 	img_data.img = mlx_new_image(mlx, WIDTH, HEIGHT);
@@ -158,9 +158,10 @@ int	main(void)
 		&img_data.line_length,
 		&img_data.endian
 	);
-	t_pixel	pix_a = { .x = 10, .y = 81, .color = 0x00FF0000 };
-	t_pixel	pix_b = { .x = 1920, .y = 1001, .color = 0x00FF0000 };
-	draw_line(&img_data, pix_a, pix_b);
+	//t_pixel	pix_a = { .x = 10, .y = 81, .color = 0x00FF0000 };
+	//t_pixel	pix_b = { .x = 1920, .y = 1001, .color = 0x00FF0000 };
+	//draw_line(&img_data, pix_a, pix_b);
+	draw_grid(&img_data, &grid_data, grid);
 	mlx_put_image_to_window(mlx, mlx_win, img_data.img, 0, 0);
 	mlx_loop(mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:55:06 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/03 18:13:29 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/06 13:27:40 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,27 @@ void	draw_line(t_img_data *img_data, t_pixel pix_a, t_pixel pix_b)
 		pix_b.y = roundf(pix_a.y + i * y_step);
 		put_pixel(img_data, pix_b);
 		i++;
+	}
+}
+
+void	draw_grid(t_img_data *img_data, t_grid_data *grid_data, int **grid)
+{
+	int	y;
+	int	x;
+	t_pixel	pixel;
+
+	y = 0;
+	pixel.color = 0x00FF0000;
+	while (y <= grid_data->height)
+	{
+		x = 0;
+		pixel.y = grid_data->start_point.y + (grid_data->spacing * y);
+		while (x < grid_data->width)
+		{
+			pixel.x = grid_data->start_point.x + (grid_data->spacing * x);
+			put_pixel(img_data, pixel);
+			x++;
+		}
+		y++;
 	}
 }
