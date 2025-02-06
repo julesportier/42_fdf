@@ -6,7 +6,7 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 07:13:27 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/04 14:04:42 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:45:46 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,28 +110,5 @@ void	fill_grid(int **grid, t_grid_data grid_data, int fd)
 			grid[r][c] = ft_atoi(splits[c]);
 		ft_free_splits(splits);
 		r++;
-	}
-}
-
-void	store_max_alt(t_grid_data *grid_data, int **grid)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	grid_data->alt_max = grid[0][0];
-	grid_data->alt_min = grid[0][0];
-	while (y < grid_data->height)
-	{
-		x = 0;
-		while (x < grid_data->width)
-		{
-			if (grid[y][x] < grid_data->alt_min)
-				grid_data->alt_min = grid[y][x];
-			if (grid[y][x] > grid_data->alt_max)
-				grid_data->alt_max = grid[y][x];
-			x++;
-		}
-		y++;
 	}
 }

@@ -48,10 +48,10 @@ t_grid_data	get_grid_size(int fd);
 int			get_fd(char *filename);
 int			**malloc_grid(t_grid_data grid_data);
 void		fill_grid(int **grid, t_grid_data grid_data, int fd);
-void		store_max_alt(t_grid_data *grid_data, int **grid);
 // STORE_GRID_DATA
 void	store_spacing(t_grid_data *grid_data);
 void	store_start_point(t_grid_data *grid_data);
+void		store_max_alt(t_grid_data *grid_data, int **grid);
 // UTILS
 int			ft_splitlen(char **splits);
 void		ft_free_splits(char **array);

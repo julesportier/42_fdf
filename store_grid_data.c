@@ -6,11 +6,34 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:35:39 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/06 12:42:33 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:45:59 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	store_max_alt(t_grid_data *grid_data, int **grid)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	grid_data->alt_max = grid[0][0];
+	grid_data->alt_min = grid[0][0];
+	while (y < grid_data->height)
+	{
+		x = 0;
+		while (x < grid_data->width)
+		{
+			if (grid[y][x] < grid_data->alt_min)
+				grid_data->alt_min = grid[y][x];
+			if (grid[y][x] > grid_data->alt_max)
+				grid_data->alt_max = grid[y][x];
+			x++;
+		}
+		y++;
+	}
+}
 
 void	store_spacing(t_grid_data *grid_data)
 {
