@@ -142,6 +142,8 @@ int	main(void)
 		}
 		i++;
 	}
+	store_max_alt(&grid_data, grid);
+	ft_printf("grid max alt == %d\ngrid min alt == %d\n", grid_data.alt_max, grid_data.alt_min);
 	ft_err_free2d_exit(grid, grid_data.height, "free grid");
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "HELLO");
