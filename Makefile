@@ -17,6 +17,7 @@ HEADER := fdf.h
 SRC := test.c \
        utils.c \
        parsing.c \
+       store_grid_data.c \
        draw.c
 OBJ := $(SRC:%.c=%.o)
 

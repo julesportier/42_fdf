@@ -6,7 +6,7 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:11:59 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/04 14:04:44 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:35:54 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define WIDTH 1920
 # define HEIGHT 1080
+# define ZOOM 90
 
 typedef struct s_img_data
 {
@@ -38,6 +39,8 @@ typedef struct s_grid_data
 	int	height;
 	int	alt_max;
 	int	alt_min;
+	int	spacing;
+	t_pixel	start_point;
 }	t_grid_data;
 
 // PARSING
@@ -46,6 +49,9 @@ int			get_fd(char *filename);
 int			**malloc_grid(t_grid_data grid_data);
 void		fill_grid(int **grid, t_grid_data grid_data, int fd);
 void		store_max_alt(t_grid_data *grid_data, int **grid);
+// STORE_GRID_DATA
+void	store_spacing(t_grid_data *grid_data);
+void	store_start_point(t_grid_data *grid_data);
 // UTILS
 int			ft_splitlen(char **splits);
 void		ft_free_splits(char **array);

@@ -6,7 +6,7 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:33:57 by juportie          #+#    #+#             */
-/*   Updated: 2025/01/27 15:33:44 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:29:49 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,10 @@ int	main(void)
 	}
 	store_max_alt(&grid_data, grid);
 	ft_printf("grid max alt == %d\ngrid min alt == %d\n", grid_data.alt_max, grid_data.alt_min);
+	store_spacing(&grid_data);
+	ft_printf("grid spacing == %d\n", grid_data.spacing);
+	store_start_point(&grid_data);
+	ft_printf("start.x == %d\nstart.y == %d\n", grid_data.start_point.x, grid_data.start_point.y);
 	ft_err_free2d_exit(grid, grid_data.height, "free grid");
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "HELLO");
