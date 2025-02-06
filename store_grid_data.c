@@ -6,7 +6,7 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:35:39 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/06 12:45:59 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/06 13:03:08 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	store_spacing(t_grid_data *grid_data)
 void	store_start_point(t_grid_data *grid_data)
 {
 	grid_data->start_point.y = (
-		(HEIGHT - grid_data->spacing * grid_data->height) / 2);
+			(HEIGHT - grid_data->spacing * grid_data->height) / 2);
 	grid_data->start_point.x = (
-		(WIDTH - grid_data->spacing * grid_data->width) / 2);
+			(WIDTH - grid_data->spacing * grid_data->width) / 2);
 }
