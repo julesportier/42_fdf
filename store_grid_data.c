@@ -51,7 +51,7 @@ void	store_spacing(t_grid_data *grid_data)
 void	store_start_point(t_grid_data *grid_data)
 {
 	grid_data->start_point.y = (
-			(HEIGHT - grid_data->spacing * grid_data->height) / 2);
+			(HEIGHT - grid_data->spacing * (grid_data->height - 1)) / 2);
 	grid_data->start_point.x = (
 			(WIDTH - grid_data->spacing * (grid_data->width - 1)) / 2);
 }

@@ -64,8 +64,8 @@ void	draw_grid(t_img_data *img_data, t_grid_data *grid_data, int **grid)
 	t_pixel	pixel;
 
 	y = 0;
-	pixel.color = 0x00FF0000;
-	while (y <= grid_data->height)
+	pixel.color = 0x00FFFF00;
+	while (y < grid_data->height)
 	{
 		x = 0;
 		pixel.y = grid_data->start_point.y + (grid_data->spacing * y);
