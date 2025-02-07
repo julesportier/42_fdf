@@ -6,7 +6,7 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:11:59 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/06 13:22:14 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/07 14:40:10 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define WIDTH 1920
 # define HEIGHT 1080
-# define ZOOM 90
+# define ZOOM 50
 
 typedef struct s_img_data
 {
@@ -63,6 +63,7 @@ char		*remove_end_nl(char *str);
 void		put_pixel(t_img_data *img_data, t_pixel pixel);
 void		draw_line(t_img_data *img_data, t_pixel pix_a, t_pixel pix_b);
 void	draw_grid(t_img_data *img_data, t_grid_data *grid_data, int **grid);
+void	draw_iso_grid(t_img_data *img_data, t_grid_data *grid_data, int **grid);
 
 //typedef struct	s_pos {
 //	int	x;

@@ -6,7 +6,7 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:33:57 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/06 13:34:19 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/07 10:09:46 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,8 @@ int	main(void)
 	//t_pixel	pix_a = { .x = 10, .y = 81, .color = 0x00FF0000 };
 	//t_pixel	pix_b = { .x = 1920, .y = 1001, .color = 0x00FF0000 };
 	//draw_line(&img_data, pix_a, pix_b);
-	draw_grid(&img_data, &grid_data, grid);
+	draw_iso_grid(&img_data, &grid_data, grid);
+	//draw_grid(&img_data, &grid_data, grid);
 	mlx_put_image_to_window(mlx, mlx_win, img_data.img, 0, 0);
 	mlx_loop(mlx);
 }
