@@ -15,7 +15,7 @@
 
 # define WIDTH 1920
 # define HEIGHT 1080
-# define ZOOM 50
+# define ZOOM 0.7
 
 typedef struct s_img_data
 {
@@ -31,6 +31,8 @@ typedef struct s_pixel
 	int	x;
 	int	y;
 	int	z;
+	float	ax;
+	float	ay;
 	int	color;
 }	t_pixel;
 
@@ -40,7 +42,11 @@ typedef struct s_grid_data
 	int		height;
 	int		alt_max;
 	int		alt_min;
-	int		spacing;
+	float		y_max;
+	float		y_min;
+	float		x_max;
+	float		x_min;
+	float		spacing;
 	t_pixel	start_point;
 }	t_grid_data;
 
@@ -51,7 +57,10 @@ t_pixel		**malloc_grid(t_grid_data grid_data);
 void		fill_grid(t_pixel **grid, t_grid_data grid_data, int fd);
 // STORE_GRID_DATA
 void		store_max_alt(t_grid_data *grid_data, t_pixel **grid);
+void		store_pos_limits(t_grid_data *grid_data, t_pixel **grid);
+void		scale_limits(t_grid_data *grid_data, t_pixel **grid);
 void		store_spacing(t_grid_data *grid_data);
+void		scale_to_win(t_grid_data *grid_data, t_pixel **grid);
 void		store_start_point(t_grid_data *grid_data);
 // UTILS
 int			ft_splitlen(char **splits);

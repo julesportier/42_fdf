@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
 void	store_max_alt(t_grid_data *grid_data, t_pixel **grid)
 {
@@ -35,13 +36,88 @@ void	store_max_alt(t_grid_data *grid_data, t_pixel **grid)
 	}
 }
 
+void	store_pos_limits(t_grid_data *grid_data, t_pixel **grid)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	grid_data->x_max = grid[0][0].ax;
+	grid_data->x_min = grid[0][0].ax;
+	grid_data->y_max = grid[0][0].ay;
+	grid_data->y_min = grid[0][0].ay;
+	while (y < grid_data->height)
+	{
+		x = 0;
+		while (x < grid_data->width)
+		{
+			if (grid[y][x].ax < grid_data->x_min)
+				grid_data->x_min = grid[y][x].ax;
+			if (grid[y][x].ax > grid_data->x_max)
+				grid_data->x_max = grid[y][x].ax;
+			if (grid[y][x].ay < grid_data->y_min)
+				grid_data->y_min = grid[y][x].ay;
+			if (grid[y][x].ay > grid_data->y_max)
+				grid_data->y_max = grid[y][x].ay;
+			x++;
+		}
+		y++;
+	}
+}
+
+void	scale_limits(t_grid_data *grid_data, t_pixel **grid)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < grid_data->height)
+	{
+		x = 0;
+		while (x < grid_data->width)
+		{
+			grid[y][x].ax -= grid_data->x_min;
+			grid[y][x].ay -= grid_data->y_min;
+			printf("x == %f, y == %f, alt == %d\n", grid[y][x].ax, grid[y][x].ay, grid[y][x].z);
+			x++;
+		}
+		y++;
+	}
+	grid_data->x_max -= grid_data->x_min;
+	grid_data->x_min -= grid_data->x_min;
+	grid_data->y_max -= grid_data->y_min;
+	grid_data->y_min -= grid_data->y_min;
+}
+
+void	scale_to_win(t_grid_data *grid_data, t_pixel **grid)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < grid_data->height)
+	{
+		x = 0;
+		while (x < grid_data->width)
+		{
+			grid[y][x].x = grid[y][x].ax * grid_data->spacing + (WIDTH - (float)WIDTH * ZOOM) / 2;
+			grid[y][x].y = grid[y][x].ay * grid_data->spacing + (HEIGHT - (float)HEIGHT * ZOOM) / 2;
+			//grid[y][x].x = grid[y][x].ax + (WIDTH - (float)WIDTH * ZOOM) / 2;
+			//grid[y][x].y = grid[y][x].ay + (HEIGHT - (float)HEIGHT * ZOOM) / 2;
+			printf("x == %d, y == %d, alt == %d\n", grid[y][x].x, grid[y][x].y, grid[y][x].z);
+			x++;
+		}
+		y++;
+	}
+}
+
 void	store_spacing(t_grid_data *grid_data)
 {
-	int	height;
-	int	width;
+	float	height;
+	float	width;
 
-	height = (HEIGHT * ZOOM / 100) / grid_data->height;
-	width = (WIDTH * ZOOM / 100) / grid_data->width;
+	height = ((float)HEIGHT * ZOOM) / grid_data->y_max;
+	width = ((float)WIDTH * ZOOM) / grid_data->x_max;
 	if (height < width)
 		grid_data->spacing = height;
 	else

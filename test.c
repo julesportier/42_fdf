@@ -15,6 +15,7 @@
 #include "minilibx/mlx.h"
 //#include <math.h>
 #include "libft/ftpf_printf.h"
+#include <stdio.h>
 //DEBUG
 //#include <stdio.h>
 
@@ -97,10 +98,8 @@ int	main(void)
 	close(fd);
 	store_max_alt(&grid_data, grid);
 	ft_printf("grid max alt == %d\ngrid min alt == %d\n", grid_data.alt_max, grid_data.alt_min);
-	store_spacing(&grid_data);
-	ft_printf("grid spacing == %d\n", grid_data.spacing);
-	store_start_point(&grid_data);
-	ft_printf("start.x == %d\nstart.y == %d\n", grid_data.start_point.x, grid_data.start_point.y);
+	//store_start_point(&grid_data);
+	//ft_printf("start.x == %d\nstart.y == %d\n", grid_data.start_point.x, grid_data.start_point.y);
 	//ft_err_free2d_exit(grid, grid_data.height, "free grid");
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "HELLO");
@@ -112,6 +111,15 @@ int	main(void)
 		&img_data.endian
 	);
 	store_iso_pos(&img_data, &grid_data, grid);
+	store_pos_limits(&grid_data, grid);
+	printf("grid max y == %f, grid max x == %f\n", grid_data.y_max, grid_data.x_max);
+	printf("grid min y == %f, grid min x == %f\n", grid_data.y_min, grid_data.x_min);
+	scale_limits(&grid_data, grid);
+	printf("grid max y == %f, grid max x == %f\n", grid_data.y_max, grid_data.x_max);
+	printf("grid min y == %f, grid min x == %f\n", grid_data.y_min, grid_data.x_min);
+	store_spacing(&grid_data);
+	printf("grid spacing == %f\n", grid_data.spacing);
+	scale_to_win(&grid_data, grid);
 	draw_grid(&img_data, &grid_data, grid);
 	mlx_put_image_to_window(mlx, mlx_win, img_data.img, 0, 0);
 	mlx_loop(mlx);
