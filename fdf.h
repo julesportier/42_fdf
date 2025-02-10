@@ -30,6 +30,7 @@ typedef struct s_pixel
 {
 	int	x;
 	int	y;
+	int	z;
 	int	color;
 }	t_pixel;
 
@@ -46,10 +47,10 @@ typedef struct s_grid_data
 // PARSING
 t_grid_data	get_grid_size(int fd);
 int			get_fd(char *filename);
-int			**malloc_grid(t_grid_data grid_data);
-void		fill_grid(int **grid, t_grid_data grid_data, int fd);
+t_pixel		**malloc_grid(t_grid_data grid_data);
+void		fill_grid(t_pixel **grid, t_grid_data grid_data, int fd);
 // STORE_GRID_DATA
-void		store_max_alt(t_grid_data *grid_data, int **grid);
+void		store_max_alt(t_grid_data *grid_data, t_pixel **grid);
 void		store_spacing(t_grid_data *grid_data);
 void		store_start_point(t_grid_data *grid_data);
 // UTILS
@@ -58,12 +59,14 @@ void		ft_free_splits(char **array);
 void		ft_err_exit(char *error);
 void		ft_err_free_exit(void *mem, char *error);
 void		ft_err_free2d_exit(int **mem, int sub_nbr, char *error);
+void		ft_err_freegrid_exit(t_pixel **mem, int sub_nbr, char *error);
 char		*remove_end_nl(char *str);
 // DRAW
 void		put_pixel(t_img_data *img_data, t_pixel pixel);
 void		draw_line(t_img_data *img_data, t_pixel pix_a, t_pixel pix_b);
-void	draw_grid(t_img_data *img_data, t_grid_data *grid_data, int **grid);
-void	draw_iso_grid(t_img_data *img_data, t_grid_data *grid_data, int **grid);
+void	draw_grid(t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid);
+//void	draw_iso_grid(t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid);
+void	store_iso_pos(t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid);
 
 //typedef struct	s_pos {
 //	int	x;

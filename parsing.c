@@ -6,7 +6,7 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 07:13:27 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/06 12:45:46 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:04:42 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,26 +66,27 @@ t_grid_data	get_grid_size(int fd)
 	}
 }
 
-int	**malloc_grid(t_grid_data grid_data)
+t_pixel	**malloc_grid(t_grid_data grid_data)
 {
-	int	**grid;
+	t_pixel	**grid;
 	int	i;
 
 	i = 0;
-	grid = malloc(grid_data.height * sizeof(int *));
+	grid = malloc(grid_data.height * sizeof(t_pixel *));
 	if (grid == NULL)
 		perror("malloc() error");
 	while (i < grid_data.height)
 	{
-		grid[i] = malloc(grid_data.width * sizeof(int));
+		grid[i] = malloc(grid_data.width * sizeof(t_pixel));
 		if (grid[i] == NULL)
-			ft_err_free2d_exit(grid, i, "subarray malloc() failed");
+			ft_err_freegrid_exit(grid, i, "subarray malloc() failed");
+		ft_bzero(grid[i], grid_data.width * sizeof(t_pixel));
 		i++;
 	}
 	return (grid);
 }
 
-void	fill_grid(int **grid, t_grid_data grid_data, int fd)
+void	fill_grid(t_pixel **grid, t_grid_data grid_data, int fd)
 {
 	char	*line;
 	char	**splits;
@@ -97,7 +98,7 @@ void	fill_grid(int **grid, t_grid_data grid_data, int fd)
 	{
 		line = remove_end_nl(get_next_line(fd));
 		if (line == NULL)
-			ft_err_free2d_exit(grid, grid_data.height, "fill_grid() error");
+			ft_err_freegrid_exit(grid, grid_data.height, "fill_grid() error");
 		splits = ft_split(line, ' ');
 		free(line);
 		if (splits == NULL)
@@ -107,7 +108,7 @@ void	fill_grid(int **grid, t_grid_data grid_data, int fd)
 		}
 		c = -1;
 		while (++c < grid_data.width)
-			grid[r][c] = ft_atoi(splits[c]);
+			grid[r][c].z = ft_atoi(splits[c]);
 		ft_free_splits(splits);
 		r++;
 	}

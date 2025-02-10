@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "fdf.h"
 #include "libft/libft.h"
 #include <stdlib.h>
 
@@ -57,6 +58,15 @@ void	ft_err_free_exit(void *mem, char *error)
 }
 
 void	ft_err_free2d_exit(int **mem, int sub_nbr, char *error)
+{
+	while (sub_nbr--)
+		free(mem[sub_nbr]);
+	free(mem);
+	ft_putendl_fd(error, 2);
+	exit(EXIT_FAILURE);
+}
+
+void	ft_err_freegrid_exit(t_pixel **mem, int sub_nbr, char *error)
 {
 	while (sub_nbr--)
 		free(mem[sub_nbr]);

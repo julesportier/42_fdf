@@ -12,23 +12,23 @@
 
 #include "fdf.h"
 
-void	store_max_alt(t_grid_data *grid_data, int **grid)
+void	store_max_alt(t_grid_data *grid_data, t_pixel **grid)
 {
 	int	y;
 	int	x;
 
 	y = 0;
-	grid_data->alt_max = grid[0][0];
-	grid_data->alt_min = grid[0][0];
+	grid_data->alt_max = grid[0][0].z;
+	grid_data->alt_min = grid[0][0].z;
 	while (y < grid_data->height)
 	{
 		x = 0;
 		while (x < grid_data->width)
 		{
-			if (grid[y][x] < grid_data->alt_min)
-				grid_data->alt_min = grid[y][x];
-			if (grid[y][x] > grid_data->alt_max)
-				grid_data->alt_max = grid[y][x];
+			if (grid[y][x].z < grid_data->alt_min)
+				grid_data->alt_min = grid[y][x].z;
+			if (grid[y][x].z > grid_data->alt_max)
+				grid_data->alt_max = grid[y][x].z;
 			x++;
 		}
 		y++;
