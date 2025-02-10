@@ -86,14 +86,16 @@ int	main(void)
 	void	*mlx;
 	void	*mlx_win;
 	t_img_data	img_data;
+	char	*map = "maps/pentenegpos.fdf";
+	//char	*map = "test.fdf";
 
-	int	fd = get_fd("test.fdf");
+	int	fd = get_fd(map);
 	t_grid_data	grid_data = get_grid_size(fd);
 	ft_printf("grid_data.width == %d\n", grid_data.width);
 	ft_printf("grid_data.height == %d\n", grid_data.height);
 	close(fd);
 	t_pixel	**grid = malloc_grid(grid_data);
-	fd = get_fd("test.fdf");
+	fd = get_fd(map);
 	fill_grid(grid, grid_data, fd);
 	close(fd);
 	store_max_alt(&grid_data, grid);
