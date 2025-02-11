@@ -16,6 +16,12 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 # define ZOOM 0.7
+# define COLOR_H 0x00FFFF00
+# define COLOR_M 0x00FF7000
+# define COLOR_L 0x000070FF
+# define RED 0x00FF0000
+# define GREEN 0x0000FF00
+# define BLUE 0x000000FF
 
 typedef struct s_img_data
 {
@@ -57,8 +63,9 @@ t_pixel		**malloc_grid(t_grid_data grid_data);
 void		fill_grid(t_pixel **grid, t_grid_data grid_data, int fd);
 // STORE_GRID_DATA
 void		store_max_alt(t_grid_data *grid_data, t_pixel **grid);
-void		store_pos_limits(t_grid_data *grid_data, t_pixel **grid);
+void		store_colors(t_grid_data *grid_data, t_pixel **grid);
 void		store_iso_pos(t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid);
+void		store_pos_limits(t_grid_data *grid_data, t_pixel **grid);
 void		scale_limits(t_grid_data *grid_data, t_pixel **grid);
 void		store_spacing(t_grid_data *grid_data);
 void		scale_to_win(t_grid_data *grid_data, t_pixel **grid);

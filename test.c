@@ -86,7 +86,7 @@ int	main(void)
 	void	*mlx;
 	void	*mlx_win;
 	t_img_data	img_data;
-	char	*map = "maps/pentenegpos.fdf";
+	char	*map = "maps/mars.fdf";
 	//char	*map = "test.fdf";
 
 	int	fd = get_fd(map);
@@ -100,6 +100,7 @@ int	main(void)
 	close(fd);
 	store_max_alt(&grid_data, grid);
 	ft_printf("grid max alt == %d\ngrid min alt == %d\n", grid_data.alt_max, grid_data.alt_min);
+	store_colors(&grid_data, grid);
 	//store_start_point(&grid_data);
 	//ft_printf("start.x == %d\nstart.y == %d\n", grid_data.start_point.x, grid_data.start_point.y);
 	//ft_err_free2d_exit(grid, grid_data.height, "free grid");

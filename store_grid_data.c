@@ -36,6 +36,81 @@ void	store_max_alt(t_grid_data *grid_data, t_pixel **grid)
 	}
 }
 
+static void	interpolate_color(t_grid_data *grid_data, t_pixel *cell)
+{
+	float	ratio;
+	unsigned int	mask;
+	int	color_ext;
+	int	tmp_neut;
+	int	tmp_ext;
+
+	color_ext = COLOR_H;
+	if (cell->z > 0)
+		ratio = (float)cell->z / grid_data->alt_max;
+	else if (cell->z == 0)
+		ratio = 0;
+	else if (cell->z < 0)
+	{
+		color_ext = COLOR_L;
+		ratio = (float)cell->z / grid_data->alt_min;
+	}
+	printf("z == %d\n", cell->z);
+	printf("ratio == %f\n", ratio);
+	mask = BLUE;
+	printf("mask == %x\n", mask);
+	cell->color = 0;
+	while (mask <= RED)
+	{
+		tmp_ext = color_ext & mask;
+		tmp_neut = COLOR_M & mask;
+		cell->color |= (int)((tmp_ext - tmp_neut) * ratio + tmp_neut);
+		mask = mask << 8;
+		printf("mask == %x\n", mask);
+		//printf("color == %x\n", cell->color);
+	}
+	printf("color == %x\n", cell->color);
+}
+
+void	store_colors(t_grid_data *grid_data, t_pixel **grid)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < grid_data->height)
+	{
+		x = 0;
+		while (x < grid_data->width)
+		{
+			interpolate_color(grid_data, &grid[y][x]);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	store_iso_pos(t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid)
+{
+	int	r;
+	int	c;
+
+	r = 0;
+	while (r < grid_data->height)
+	{
+		c = 0;
+		while (c < grid_data->width)
+		{
+			grid[r][c].ax = (c - r)*0.71;
+			grid[r][c].ay =
+				-0.82*((float)grid[r][c].z/((grid_data->alt_max - grid_data->alt_min)*0.1))
+				+ 0.41*(c + r);
+			printf("x == %f, y == %f, alt == %d\n", grid[r][c].ax, grid[r][c].ay, grid[r][c].z);
+			c++;
+		}
+		r++;
+	}
+}
+
 void	store_pos_limits(t_grid_data *grid_data, t_pixel **grid)
 {
 	int	y;
@@ -62,28 +137,6 @@ void	store_pos_limits(t_grid_data *grid_data, t_pixel **grid)
 			x++;
 		}
 		y++;
-	}
-}
-
-void	store_iso_pos(t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid)
-{
-	int	r;
-	int	c;
-
-	r = 0;
-	while (r < grid_data->height)
-	{
-		c = 0;
-		while (c < grid_data->width)
-		{
-			grid[r][c].ax = (c - r)*0.71;
-			grid[r][c].ay =
-				-0.82*((float)grid[r][c].z/((grid_data->alt_max - grid_data->alt_min)*2))
-				+ 0.41*(c + r);
-			printf("x == %f, y == %f, alt == %d\n", grid[r][c].ax, grid[r][c].ay, grid[r][c].z);
-			c++;
-		}
-		r++;
 	}
 }
 
