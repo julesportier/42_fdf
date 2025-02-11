@@ -65,6 +65,28 @@ void	store_pos_limits(t_grid_data *grid_data, t_pixel **grid)
 	}
 }
 
+void	store_iso_pos(t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid)
+{
+	int	r;
+	int	c;
+
+	r = 0;
+	while (r < grid_data->height)
+	{
+		c = 0;
+		while (c < grid_data->width)
+		{
+			grid[r][c].ax = (c - r)*0.71;
+			grid[r][c].ay =
+				-0.82*((float)grid[r][c].z/((grid_data->alt_max - grid_data->alt_min)*2))
+				+ 0.41*(c + r);
+			printf("x == %f, y == %f, alt == %d\n", grid[r][c].ax, grid[r][c].ay, grid[r][c].z);
+			c++;
+		}
+		r++;
+	}
+}
+
 void	scale_limits(t_grid_data *grid_data, t_pixel **grid)
 {
 	int	y;
@@ -89,6 +111,19 @@ void	scale_limits(t_grid_data *grid_data, t_pixel **grid)
 	grid_data->y_min -= grid_data->y_min;
 }
 
+void	store_spacing(t_grid_data *grid_data)
+{
+	float	height;
+	float	width;
+
+	height = ((float)HEIGHT * ZOOM) / grid_data->y_max;
+	width = ((float)WIDTH * ZOOM) / grid_data->x_max;
+	if (height < width)
+		grid_data->spacing = height;
+	else
+		grid_data->spacing = width;
+}
+
 void	scale_to_win(t_grid_data *grid_data, t_pixel **grid)
 {
 	int	y;
@@ -109,19 +144,6 @@ void	scale_to_win(t_grid_data *grid_data, t_pixel **grid)
 		}
 		y++;
 	}
-}
-
-void	store_spacing(t_grid_data *grid_data)
-{
-	float	height;
-	float	width;
-
-	height = ((float)HEIGHT * ZOOM) / grid_data->y_max;
-	width = ((float)WIDTH * ZOOM) / grid_data->x_max;
-	if (height < width)
-		grid_data->spacing = height;
-	else
-		grid_data->spacing = width;
 }
 
 void	store_start_point(t_grid_data *grid_data)

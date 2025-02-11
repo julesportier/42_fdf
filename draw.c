@@ -78,25 +78,3 @@ void	draw_grid(t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid)
 		y++;
 	}
 }
-
-void	store_iso_pos(t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid)
-{
-	int	r;
-	int	c;
-
-	r = 0;
-	while (r < grid_data->height)
-	{
-		c = 0;
-		while (c < grid_data->width)
-		{
-			grid[r][c].ax = (c - r)*0.71;
-			grid[r][c].ay =
-				-0.82*((float)grid[r][c].z/((grid_data->alt_max - grid_data->alt_min)*2))
-				+ 0.41*(c + r);
-			printf("x == %f, y == %f, alt == %d\n", grid[r][c].ax, grid[r][c].ay, grid[r][c].z);
-			c++;
-		}
-		r++;
-	}
-}
