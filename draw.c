@@ -69,12 +69,40 @@ void	draw_grid(t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid)
 	while (y < grid_data->height)
 	{
 		x = 0;
+		grid[y][x].color = 0x00FFFFFF;
 		while (x < grid_data->width)
 		{
-			grid[y][x].color = 0x00FFFFFF;
-			put_pixel(img_data, grid[y][x]);
+			if (x != grid_data->width - 1)
+			{
+				grid[y][x+1].color = 0x00FFFFFF;
+				draw_line(img_data, grid[y][x], grid[y][x+1]);
+			}
+			if (y != grid_data->height - 1)
+			{
+				grid[y+1][x].color = 0x00FFFFFF;
+				draw_line(img_data, grid[y][x], grid[y+1][x]);
+			}
 			x++;
 		}
 		y++;
 	}
 }
+//void	draw_grid(t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid)
+//{
+//	int	y;
+//	int	x;
+//	t_pixel	pixel;
+//
+//	y = 0;
+//	while (y < grid_data->height)
+//	{
+//		x = 0;
+//		while (x < grid_data->width)
+//		{
+//			grid[y][x].color = 0x00FFFFFF;
+//			put_pixel(img_data, grid[y][x]);
+//			x++;
+//		}
+//		y++;
+//	}
+//}
