@@ -102,7 +102,12 @@ void	store_iso_pos(t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid)
 		{
 			grid[r][c].ax = (c - r)*0.71;
 			grid[r][c].ay =
-				-0.82*((float)grid[r][c].z/((grid_data->alt_max - grid_data->alt_min)*0.1))
+				-0.82 * (
+					(float)grid[r][c].z / (
+						(grid_data->alt_max - grid_data->alt_min)
+						/ ((float)(grid_data->height + grid_data->width)/16)
+					)
+				)
 				+ 0.41*(c + r);
 			printf("x == %f, y == %f, alt == %d\n", grid[r][c].ax, grid[r][c].ay, grid[r][c].z);
 			c++;
