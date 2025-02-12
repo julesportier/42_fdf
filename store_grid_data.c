@@ -54,10 +54,7 @@ static void	interpolate_color(t_grid_data *grid_data, t_pixel *cell)
 		color_ext = COLOR_L;
 		ratio = (float)cell->z / grid_data->alt_min;
 	}
-	printf("z == %d\n", cell->z);
-	printf("ratio == %f\n", ratio);
 	mask = BLUE;
-	printf("mask == %x\n", mask);
 	cell->color = 0;
 	while (mask <= RED)
 	{
@@ -65,10 +62,7 @@ static void	interpolate_color(t_grid_data *grid_data, t_pixel *cell)
 		tmp_neut = COLOR_M & mask;
 		cell->color |= (int)((tmp_ext - tmp_neut) * ratio + tmp_neut) & mask;
 		mask = mask << 8;
-		printf("mask == %x\n", mask);
-		//printf("color == %x\n", cell->color);
 	}
-	printf("color == %x\n", cell->color);
 }
 
 void	store_colors(t_grid_data *grid_data, t_pixel **grid)
@@ -109,7 +103,6 @@ void	store_iso_pos(t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid)
 					)
 				)
 				+ 0.41*(c + r);
-			printf("x == %f, y == %f, alt == %d\n", grid[r][c].ax, grid[r][c].ay, grid[r][c].z);
 			c++;
 		}
 		r++;
@@ -158,7 +151,6 @@ void	scale_limits(t_grid_data *grid_data, t_pixel **grid)
 		{
 			grid[y][x].ax -= grid_data->x_min;
 			grid[y][x].ay -= grid_data->y_min;
-			printf("x == %f, y == %f, alt == %d\n", grid[y][x].ax, grid[y][x].ay, grid[y][x].z);
 			x++;
 		}
 		y++;
@@ -195,19 +187,9 @@ void	scale_to_win(t_grid_data *grid_data, t_pixel **grid)
 		{
 			grid[y][x].x = grid[y][x].ax * grid_data->spacing + (WIDTH - (float)WIDTH * ZOOM) / 2;
 			grid[y][x].y = grid[y][x].ay * grid_data->spacing + (HEIGHT - (float)HEIGHT * ZOOM) / 2;
-			//grid[y][x].x = grid[y][x].ax + (WIDTH - (float)WIDTH * ZOOM) / 2;
-			//grid[y][x].y = grid[y][x].ay + (HEIGHT - (float)HEIGHT * ZOOM) / 2;
 			printf("x == %d, y == %d, alt == %d\n", grid[y][x].x, grid[y][x].y, grid[y][x].z);
 			x++;
 		}
 		y++;
 	}
-}
-
-void	store_start_point(t_grid_data *grid_data)
-{
-	grid_data->start_point.y = (
-			(HEIGHT - grid_data->spacing * (grid_data->height - 1)) / 2);
-	grid_data->start_point.x = (
-			(WIDTH - grid_data->spacing * (grid_data->width - 1)) / 2);
 }

@@ -69,7 +69,6 @@ void		store_pos_limits(t_grid_data *grid_data, t_pixel **grid);
 void		scale_limits(t_grid_data *grid_data, t_pixel **grid);
 void		store_spacing(t_grid_data *grid_data);
 void		scale_to_win(t_grid_data *grid_data, t_pixel **grid);
-void		store_start_point(t_grid_data *grid_data);
 // UTILS
 int			ft_splitlen(char **splits);
 void		ft_free_splits(char **array);
@@ -82,16 +81,5 @@ char		*remove_end_nl(char *str);
 void		put_pixel(t_img_data *img_data, t_pixel pixel);
 void		draw_line(t_img_data *img_data, t_pixel pix_a, t_pixel pix_b);
 void	draw_grid(t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid);
-//void	draw_iso_grid(t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid);
 
-//typedef struct	s_pos {
-//	int	x;
-//	int	y;
-//}	t_pos;
-//
-//typedef struct	s_pos_d {
-//	double	x;
-//	double	y;
-//}	t_pos_d;
-//
 #endif

@@ -15,71 +15,8 @@
 #include "minilibx/mlx.h"
 //#include <math.h>
 #include "libft/ftpf_printf.h"
-#include <stdio.h>
 //DEBUG
-//#include <stdio.h>
-
-/*
-Input coordinates:
-----------
-|    1   |
-|-1  0  1|
-|   -1   |
-----------
-*/
-//static t_pos	scale_pixel(double x, double y, int width, int height)
-//{
-//	t_pos	pixel;
-//
-//	x = (x + 1) * 0.5;
-//	y = (y + 1) * 0.5;
-//	pixel.x = x * width;
-//	pixel.y = y * height;
-//	return (pixel);
-//}
-
-static void	put_square(t_img_data *img_data, t_pixel pixel, int size)
-{
-	int	i;
-	int	j;
-	t_pixel	pix;
-
-	i = 0;
-	pix.color = pixel.color;
-	while (i < size)
-	{
-		j = 0;
-		while (j < size)
-		{
-			if (pixel.x + i <= WIDTH && pixel.y + j <= HEIGHT)
-			{
-				pix.x = pixel.x + i;
-				pix.y = pixel.y + j;
-				put_pixel(img_data, pix);
-			}
-			if (pixel.x + i <= WIDTH && pixel.y - j <= HEIGHT)
-			{
-				pix.x = pixel.x + i;
-				pix.y = pixel.y - j;
-				put_pixel(img_data, pix);
-			}
-			if (pixel.x - i <= WIDTH && pixel.y + j <= HEIGHT)
-			{
-				pix.x = pixel.x - i;
-				pix.y = pixel.y + j;
-				put_pixel(img_data, pix);
-			}
-			if (pixel.x - i <= WIDTH && pixel.y - j <= HEIGHT)
-			{
-				pix.x = pixel.x - i;
-				pix.y = pixel.y - j;
-				put_pixel(img_data, pix);
-			}
-			j++;
-		}
-		i++;
-	}
-}
+#include <stdio.h>
 
 int	main(void)
 {
@@ -102,9 +39,6 @@ int	main(void)
 	store_max_alt(&grid_data, grid);
 	ft_printf("grid max alt == %d\ngrid min alt == %d\n", grid_data.alt_max, grid_data.alt_min);
 	store_colors(&grid_data, grid);
-	//store_start_point(&grid_data);
-	//ft_printf("start.x == %d\nstart.y == %d\n", grid_data.start_point.x, grid_data.start_point.y);
-	//ft_err_free2d_exit(grid, grid_data.height, "free grid");
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "HELLO");
 	img_data.img = mlx_new_image(mlx, WIDTH, HEIGHT);
