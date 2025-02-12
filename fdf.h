@@ -42,6 +42,7 @@ typedef struct s_mlx_data
 {
 	void	*mlx;
 	void	*win;
+	t_img_data img;
 }	t_mlx_data;
 
 typedef struct s_pixel
@@ -80,8 +81,8 @@ void		err_freegrid_exit(t_pixel **mem, int sub_nbr, char *error);
 int			splitlen(char **splits);
 char		*remove_end_nl(char *str);
 // MLX_UTILS
-int			close_win_mouse(t_mlx_data *mlx_data);
-int			close_win_esc(int keycode, t_mlx_data *mlx_data);
+int			end_loop_mouse(t_mlx_data *mlx_data);
+int			end_loop_esc(int keycode, t_mlx_data *mlx_data);
 // PARSING
 t_grid_data	get_grid_size(int fd);
 int			get_fd(char *filename);

@@ -12,6 +12,7 @@
 
 #include "fdf.h"
 #include <stdlib.h>
+#include "minilibx/mlx.h"
 
 void	free_splits(char **array)
 {
@@ -39,6 +40,8 @@ void	freegrid(t_pixel **grid, int sub_nbr)
 
 void	free_mlx(t_mlx_data *mlx_data)
 {
-	free(mlx_data->win);
+	mlx_destroy_image(mlx_data->mlx, mlx_data->img.img);
+	mlx_destroy_window(mlx_data->mlx, mlx_data->win);
+	mlx_destroy_display(mlx_data->mlx);
 	free(mlx_data->mlx);
 }

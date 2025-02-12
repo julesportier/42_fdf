@@ -6,23 +6,22 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 09:47:42 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/12 11:02:50 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:43:25 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-//#include "libft/libft.h"
 #include "minilibx/mlx.h"
+//#include "libft/libft.h"
 
-int	close_win_mouse(t_mlx_data *mlx_data)
+int	end_loop_mouse(t_mlx_data *mlx_data)
 {
-	mlx_destroy_window(mlx_data->mlx, mlx_data->win);
+	mlx_loop_end(mlx_data->mlx);
 	return (0);
 }
-
-int	close_win_esc(int keycode, t_mlx_data *mlx_data)
+int	end_loop_esc(int keycode, t_mlx_data *mlx_data)
 {
 	if (keycode == ESC)
-		mlx_destroy_window(mlx_data->mlx, mlx_data->win);
+		mlx_loop_end(mlx_data->mlx);
 	return (0);
 }

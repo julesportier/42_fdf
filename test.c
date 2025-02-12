@@ -6,7 +6,7 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:33:57 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/12 10:49:42 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:31:43 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@
 int	main(void)
 {
 	t_mlx_data	mlx_data;
-	t_img_data	img_data;
-	char	*map = "maps/10-2.fdf";
+	//char	*map = "maps/10-2.fdf";
 	//char	*map = "maps/mars.fdf";
-	//char	*map = "test.fdf";
+	char	*map = "test.fdf";
 
 	int	fd = get_fd(map);
 	t_grid_data	grid_data = get_grid_size(fd);
@@ -40,14 +39,14 @@ int	main(void)
 	store_colors(&grid_data, grid);
 	mlx_data.mlx = mlx_init();
 	mlx_data.win = mlx_new_window(mlx_data.mlx, WIDTH, HEIGHT, map);
-	img_data.img = mlx_new_image(mlx_data.mlx, WIDTH, HEIGHT);
-	img_data.addr = mlx_get_data_addr(
-		img_data.img,
-		&img_data.bits_per_pixel,
-		&img_data.line_length,
-		&img_data.endian
+	mlx_data.img.img = mlx_new_image(mlx_data.mlx, WIDTH, HEIGHT);
+	mlx_data.img.addr = mlx_get_data_addr(
+		mlx_data.img.img,
+		&mlx_data.img.bits_per_pixel,
+		&mlx_data.img.line_length,
+		&mlx_data.img.endian
 	);
-	store_iso_pos(&img_data, &grid_data, grid);
+	store_iso_pos(&mlx_data.img, &grid_data, grid);
 	store_pos_limits(&grid_data, grid);
 	printf("grid max y == %f, grid max x == %f\n", grid_data.y_max, grid_data.x_max);
 	printf("grid min y == %f, grid min x == %f\n", grid_data.y_min, grid_data.x_min);
@@ -57,9 +56,13 @@ int	main(void)
 	store_spacing(&grid_data);
 	printf("grid spacing == %f\n", grid_data.spacing);
 	scale_to_win(&grid_data, grid);
-	draw_grid(&img_data, &grid_data, grid);
-	mlx_put_image_to_window(mlx_data.mlx, mlx_data.win, img_data.img, 0, 0);
-	mlx_hook(mlx_data.win, ON_DESTROY, 1L<<3, close_win_mouse, &mlx_data);
-	mlx_key_hook(mlx_data.win, close_win_esc, &mlx_data);
+	draw_grid(&mlx_data.img, &grid_data, grid);
+	mlx_put_image_to_window(mlx_data.mlx, mlx_data.win, mlx_data.img.img, 0, 0);
+	mlx_hook(mlx_data.win, ON_DESTROY, 1L<<3, end_loop_mouse, &mlx_data);
+	mlx_key_hook(mlx_data.win, end_loop_esc, &mlx_data);
 	mlx_loop(mlx_data.mlx);
+	printf("end loop\n");
+	free_mlx(&mlx_data);
+	freegrid(grid, grid_data.height);
+	return (0);
 }
