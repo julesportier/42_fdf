@@ -46,7 +46,7 @@ static int	interpolate_color(t_pixel *pix_a, int color_b, int step_nbr, int i)
 	{
 		tmp_b = color_b & mask;
 		tmp_a = pix_a->color & mask;
-		color |= (int)((tmp_b - tmp_a) * ((float)i / step_nbr) + tmp_a);
+		color |= (int)((tmp_b - tmp_a) * ((float)i / step_nbr) + tmp_a) & mask;
 		mask = mask << 8;
 	}
 	return (color);

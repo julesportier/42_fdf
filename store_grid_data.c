@@ -63,7 +63,7 @@ static void	interpolate_color(t_grid_data *grid_data, t_pixel *cell)
 	{
 		tmp_ext = color_ext & mask;
 		tmp_neut = COLOR_M & mask;
-		cell->color |= (int)((tmp_ext - tmp_neut) * ratio + tmp_neut);
+		cell->color |= (int)((tmp_ext - tmp_neut) * ratio + tmp_neut) & mask;
 		mask = mask << 8;
 		printf("mask == %x\n", mask);
 		//printf("color == %x\n", cell->color);
