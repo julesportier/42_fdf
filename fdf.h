@@ -6,7 +6,7 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:11:59 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/12 10:26:35 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/12 10:49:47 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@
 # define ON_DESTROY 17
 # define ESC 65307
 
-typedef struct s_mlx_data
-{
-	void	*mlx;
-	void	*win;
-}	t_mlx_data;
-
 typedef struct s_img_data
 {
 	void	*img;
@@ -43,6 +37,12 @@ typedef struct s_img_data
 	int		line_length;
 	int		endian;
 }	t_img_data;
+
+typedef struct s_mlx_data
+{
+	void	*mlx;
+	void	*win;
+}	t_mlx_data;
 
 typedef struct s_pixel
 {
