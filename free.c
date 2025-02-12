@@ -1,28 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_utils.c                                        :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/12 09:47:42 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/12 11:02:50 by juportie         ###   ########.fr       */
+/*   Created: 2025/02/12 10:59:52 by juportie          #+#    #+#             */
+/*   Updated: 2025/02/12 11:01:59 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-//#include "libft/libft.h"
-#include "minilibx/mlx.h"
+#include <stdlib.h>
 
-int	close_win_mouse(t_mlx_data *mlx_data)
+void	free_splits(char **array)
 {
-	mlx_destroy_window(mlx_data->mlx, mlx_data->win);
-	return (0);
+	int		i;
+	char	**addr;
+
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		array[i] = NULL;
+		i++;
+	}
+	addr = array;
+	free(array);
+	array = NULL;
 }
 
-int	close_win_esc(int keycode, t_mlx_data *mlx_data)
+void	freegrid(t_pixel **grid, int sub_nbr)
 {
-	if (keycode == ESC)
-		mlx_destroy_window(mlx_data->mlx, mlx_data->win);
-	return (0);
+	while (sub_nbr--)
+		free(grid[sub_nbr]);
+	free(grid);
+}
+
+void	free_mlx(t_mlx_data *mlx_data)
+{
+	free(mlx_data->win);
+	free(mlx_data->mlx);
 }

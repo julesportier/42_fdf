@@ -15,8 +15,10 @@ NAME := fdf
 
 HEADER := fdf.h
 SRC := test.c \
-       mlx_utils.c \
+       free.c \
+       error.c \
        utils.c \
+       mlx_utils.c \
        parsing.c \
        store_grid_data.c \
        draw.c

@@ -6,7 +6,7 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:11:59 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/12 10:49:47 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:08:46 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,17 @@ typedef struct s_grid_data
 	t_pixel	start_point;
 }	t_grid_data;
 
+// FREE
+void		free_splits(char **array);
+void		freegrid(t_pixel **grid, int sub_nbr);
+void		free_mlx(t_mlx_data *mlx_data);
+// ERROR
+void		err_exit(char *error);
+void		err_free_exit(void *mem, char *error);
+void		err_freegrid_exit(t_pixel **mem, int sub_nbr, char *error);
+// UTILS
+int			splitlen(char **splits);
+char		*remove_end_nl(char *str);
 // MLX_UTILS
 int	close_win_mouse(t_mlx_data *mlx_data);
 int	close_win_esc(int keycode, t_mlx_data *mlx_data);
@@ -84,14 +95,6 @@ void		store_pos_limits(t_grid_data *grid_data, t_pixel **grid);
 void		scale_limits(t_grid_data *grid_data, t_pixel **grid);
 void		store_spacing(t_grid_data *grid_data);
 void		scale_to_win(t_grid_data *grid_data, t_pixel **grid);
-// UTILS
-int			ft_splitlen(char **splits);
-void		ft_free_splits(char **array);
-void		ft_err_exit(char *error);
-void		ft_err_free_exit(void *mem, char *error);
-void		ft_err_free2d_exit(int **mem, int sub_nbr, char *error);
-void		ft_err_freegrid_exit(t_pixel **mem, int sub_nbr, char *error);
-char		*remove_end_nl(char *str);
 // DRAW
 void		put_pixel(t_img_data *img_data, t_pixel pixel);
 void		draw_line(t_img_data *img_data, t_pixel pix_a, t_pixel pix_b);

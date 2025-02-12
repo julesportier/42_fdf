@@ -6,7 +6,7 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 07:13:27 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/04 14:04:42 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:08:31 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,16 @@ t_grid_data	get_grid_size(int fd)
 		if (line == NULL && grid_data.width != 0)
 			return (grid_data);
 		if (line == NULL && grid_data.width == 0)
-			ft_err_exit("file is empty");
+			err_exit("file is empty");
 		if (++grid_data.height < 0)
-			ft_err_free_exit(line, "line number overflow");
+			err_free_exit(line, "line number overflow");
 		splits = ft_split(line, ' ');
 		if (splits == NULL)
-			ft_err_free_exit(line, "ft_split() error");
-		temp = ft_splitlen(splits);
-		ft_free_splits(splits);
+			err_free_exit(line, "ft_split() error");
+		temp = splitlen(splits);
+		free_splits(splits);
 		if (temp != grid_data.width && grid_data.width != 0)
-			ft_err_free_exit(line, "wrong file formating");
+			err_free_exit(line, "wrong file formating");
 		grid_data.width = temp;
 		free(line);
 	}
@@ -79,7 +79,7 @@ t_pixel	**malloc_grid(t_grid_data grid_data)
 	{
 		grid[i] = malloc(grid_data.width * sizeof(t_pixel));
 		if (grid[i] == NULL)
-			ft_err_freegrid_exit(grid, i, "subarray malloc() failed");
+			err_freegrid_exit(grid, i, "subarray malloc() failed");
 		ft_bzero(grid[i], grid_data.width * sizeof(t_pixel));
 		i++;
 	}
@@ -98,18 +98,18 @@ void	fill_grid(t_pixel **grid, t_grid_data grid_data, int fd)
 	{
 		line = remove_end_nl(get_next_line(fd));
 		if (line == NULL)
-			ft_err_freegrid_exit(grid, grid_data.height, "fill_grid() error");
+			err_freegrid_exit(grid, grid_data.height, "fill_grid() error");
 		splits = ft_split(line, ' ');
 		free(line);
 		if (splits == NULL)
 		{
-			ft_free_splits(splits);
-			ft_err_exit("fill_grid() error");
+			free_splits(splits);
+			err_exit("fill_grid() error");
 		}
 		c = -1;
 		while (++c < grid_data.width)
 			grid[r][c].z = ft_atoi(splits[c]);
-		ft_free_splits(splits);
+		free_splits(splits);
 		r++;
 	}
 }
