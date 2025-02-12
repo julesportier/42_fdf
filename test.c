@@ -86,7 +86,7 @@ int	main(void)
 	void	*mlx;
 	void	*mlx_win;
 	t_img_data	img_data;
-	char	*map = "maps/mars.fdf";
+	char	*map = "maps/10-2.fdf";
 	//char	*map = "test.fdf";
 
 	int	fd = get_fd(map);
