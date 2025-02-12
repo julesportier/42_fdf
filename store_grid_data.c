@@ -6,7 +6,7 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 11:35:39 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/06 13:03:08 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:19:04 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ void	store_max_alt(t_grid_data *grid_data, t_pixel **grid)
 
 static void	interpolate_color(t_grid_data *grid_data, t_pixel *cell)
 {
-	float	ratio;
 	unsigned int	mask;
-	int	color_ext;
-	int	tmp_neut;
-	int	tmp_ext;
+	float			ratio;
+	int				color_ext;
+	int				tmp_neut;
+	int				tmp_ext;
 
 	color_ext = COLOR_H;
 	if (cell->z > 0)
@@ -83,7 +83,8 @@ void	store_colors(t_grid_data *grid_data, t_pixel **grid)
 	}
 }
 
-void	store_iso_pos(t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid)
+void	store_iso_pos(
+	t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid)
 {
 	int	r;
 	int	c;
@@ -94,15 +95,12 @@ void	store_iso_pos(t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid)
 		c = 0;
 		while (c < grid_data->width)
 		{
-			grid[r][c].ax = (c - r)*0.71;
-			grid[r][c].ay =
-				-0.82 * (
+			grid[r][c].ax = (c - r) * 0.71;
+			grid[r][c].ay = -0.82 * (
 					(float)grid[r][c].z / (
 						(grid_data->alt_max - grid_data->alt_min)
-						/ ((float)(grid_data->height + grid_data->width)/16)
-					)
-				)
-				+ 0.41*(c + r);
+						/ ((float)(grid_data->height + grid_data->width) / 16)))
+				+ 0.41 * (c + r);
 			c++;
 		}
 		r++;
@@ -185,8 +183,12 @@ void	scale_to_win(t_grid_data *grid_data, t_pixel **grid)
 		x = 0;
 		while (x < grid_data->width)
 		{
-			grid[y][x].x = grid[y][x].ax * grid_data->spacing + (WIDTH - (float)WIDTH * ZOOM) / 2;
-			grid[y][x].y = grid[y][x].ay * grid_data->spacing + (HEIGHT - (float)HEIGHT * ZOOM) / 2;
+			grid[y][x].x = grid[y][x].ax
+				* grid_data->spacing
+				+ (WIDTH - (float)WIDTH * ZOOM) / 2;
+			grid[y][x].y = grid[y][x].ay
+				* grid_data->spacing
+				+ (HEIGHT - (float)HEIGHT * ZOOM) / 2;
 			printf("x == %d, y == %d, alt == %d\n", grid[y][x].x, grid[y][x].y, grid[y][x].z);
 			x++;
 		}

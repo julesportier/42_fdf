@@ -6,7 +6,7 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 07:13:27 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/12 11:08:31 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:12:43 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_grid_data	get_grid_size(int fd)
 t_pixel	**malloc_grid(t_grid_data grid_data)
 {
 	t_pixel	**grid;
-	int	i;
+	int		i;
 
 	i = 0;
 	grid = malloc(grid_data.height * sizeof(t_pixel *));

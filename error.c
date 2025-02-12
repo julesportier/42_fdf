@@ -6,7 +6,7 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 11:04:57 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/12 11:08:31 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:12:15 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,3 @@ void	err_freegrid_exit(t_pixel **grid, int sub_nbr, char *error)
 	ft_putendl_fd(error, 2);
 	exit(EXIT_FAILURE);
 }
-

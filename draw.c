@@ -6,7 +6,7 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:55:06 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/07 14:52:04 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:20:58 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	put_pixel(t_img_data *img_data, t_pixel pixel)
 
 static int	interpolate_color(t_pixel *pix_a, int color_b, int step_nbr, int i)
 {
+	int				color_ext;
+	int				tmp_b;
+	int				tmp_a;
+	int				color;
 	unsigned int	mask;
-	int	color_ext;
-	int	tmp_b;
-	int	tmp_a;
-	int	color;
 
 	if (i == 0)
 		return (pix_a->color);
@@ -77,8 +77,8 @@ void	draw_line(t_img_data *img_data, t_pixel pix_a, t_pixel pix_b)
 
 void	draw_grid(t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid)
 {
-	int	y;
-	int	x;
+	int		y;
+	int		x;
 	t_pixel	pixel;
 
 	y = 0;
@@ -88,9 +88,9 @@ void	draw_grid(t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid)
 		while (x < grid_data->width)
 		{
 			if (x != grid_data->width - 1)
-				draw_line(img_data, grid[y][x], grid[y][x+1]);
+				draw_line(img_data, grid[y][x], grid[y][x + 1]);
 			if (y != grid_data->height - 1)
-				draw_line(img_data, grid[y][x], grid[y+1][x]);
+				draw_line(img_data, grid[y][x], grid[y + 1][x]);
 			x++;
 		}
 		y++;

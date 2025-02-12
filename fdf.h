@@ -6,7 +6,7 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:11:59 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/12 11:08:46 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:23:17 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,26 @@ typedef struct s_mlx_data
 
 typedef struct s_pixel
 {
-	int	x;
-	int	y;
-	int	z;
+	int		x;
+	int		y;
+	int		z;
 	float	ax;
 	float	ay;
-	int	color;
+	int		color;
 }	t_pixel;
 
 typedef struct s_grid_data
 {
-	int		width;
-	int		height;
-	int		alt_max;
-	int		alt_min;
+	int			width;
+	int			height;
+	int			alt_max;
+	int			alt_min;
 	float		y_max;
 	float		y_min;
 	float		x_max;
 	float		x_min;
 	float		spacing;
-	t_pixel	start_point;
+	t_pixel		start_point;
 }	t_grid_data;
 
 // FREE
@@ -80,8 +80,8 @@ void		err_freegrid_exit(t_pixel **mem, int sub_nbr, char *error);
 int			splitlen(char **splits);
 char		*remove_end_nl(char *str);
 // MLX_UTILS
-int	close_win_mouse(t_mlx_data *mlx_data);
-int	close_win_esc(int keycode, t_mlx_data *mlx_data);
+int			close_win_mouse(t_mlx_data *mlx_data);
+int			close_win_esc(int keycode, t_mlx_data *mlx_data);
 // PARSING
 t_grid_data	get_grid_size(int fd);
 int			get_fd(char *filename);
@@ -90,7 +90,8 @@ void		fill_grid(t_pixel **grid, t_grid_data grid_data, int fd);
 // STORE_GRID_DATA
 void		store_max_alt(t_grid_data *grid_data, t_pixel **grid);
 void		store_colors(t_grid_data *grid_data, t_pixel **grid);
-void		store_iso_pos(t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid);
+void		store_iso_pos(
+				t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid);
 void		store_pos_limits(t_grid_data *grid_data, t_pixel **grid);
 void		scale_limits(t_grid_data *grid_data, t_pixel **grid);
 void		store_spacing(t_grid_data *grid_data);
@@ -98,6 +99,7 @@ void		scale_to_win(t_grid_data *grid_data, t_pixel **grid);
 // DRAW
 void		put_pixel(t_img_data *img_data, t_pixel pixel);
 void		draw_line(t_img_data *img_data, t_pixel pix_a, t_pixel pix_b);
-void	draw_grid(t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid);
+void		draw_grid(
+				t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid);
 
 #endif
