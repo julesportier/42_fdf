@@ -6,22 +6,34 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:11:59 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/07 14:40:10 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/12 10:26:35 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
+// window
 # define WIDTH 1920
 # define HEIGHT 1080
 # define ZOOM 0.7
+// colors for extreme altitudes
 # define COLOR_H 0x00FFFF00
 # define COLOR_M 0x00FF7000
 # define COLOR_L 0x000070FF
+// rgb masks
 # define RED 0x00FF0000
 # define GREEN 0x0000FF00
 # define BLUE 0x000000FF
+// mlx
+# define ON_DESTROY 17
+# define ESC 65307
+
+typedef struct s_mlx_data
+{
+	void	*mlx;
+	void	*win;
+}	t_mlx_data;
 
 typedef struct s_img_data
 {
@@ -56,6 +68,9 @@ typedef struct s_grid_data
 	t_pixel	start_point;
 }	t_grid_data;
 
+// MLX_UTILS
+int	close_win_mouse(t_mlx_data *mlx_data);
+int	close_win_esc(int keycode, t_mlx_data *mlx_data);
 // PARSING
 t_grid_data	get_grid_size(int fd);
 int			get_fd(char *filename);

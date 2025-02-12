@@ -6,7 +6,7 @@
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:33:57 by juportie          #+#    #+#             */
-/*   Updated: 2025/02/07 10:09:46 by juportie         ###   ########.fr       */
+/*   Updated: 2025/02/12 10:26:56 by juportie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(void)
 	ft_printf("grid max alt == %d\ngrid min alt == %d\n", grid_data.alt_max, grid_data.alt_min);
 	store_colors(&grid_data, grid);
 	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "HELLO");
+	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, map);
 	img_data.img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	img_data.addr = mlx_get_data_addr(
 		img_data.img,
@@ -60,5 +60,8 @@ int	main(void)
 	scale_to_win(&grid_data, grid);
 	draw_grid(&img_data, &grid_data, grid);
 	mlx_put_image_to_window(mlx, mlx_win, img_data.img, 0, 0);
+	t_mlx_data	mlx_data = { .mlx = mlx, .win = mlx_win };
+	mlx_hook(mlx_data.win, ON_DESTROY, 1L<<3, close_win_mouse, &mlx_data);
+	mlx_key_hook(mlx_data.win, close_win_esc, &mlx_data);
 	mlx_loop(mlx);
 }
