@@ -18,27 +18,26 @@
 //DEBUG
 #include <stdio.h>
 
-int	main(void)
+int	main(int argc, char **argv)
 {
+	if (argc != 2)
+		return (-1);
 	t_mlx_data	mlx_data;
-	//char	*map = "maps/10-2.fdf";
-	//char	*map = "maps/mars.fdf";
-	char	*map = "test.fdf";
 
-	int	fd = get_fd(map);
+	int	fd = get_fd(argv[1]);
 	t_grid_data	grid_data = get_grid_size(fd);
 	ft_printf("grid_data.width == %d\n", grid_data.width);
 	ft_printf("grid_data.height == %d\n", grid_data.height);
 	close(fd);
 	t_pixel	**grid = malloc_grid(grid_data);
-	fd = get_fd(map);
+	fd = get_fd(argv[1]);
 	fill_grid(grid, grid_data, fd);
 	close(fd);
 	store_max_alt(&grid_data, grid);
 	ft_printf("grid max alt == %d\ngrid min alt == %d\n", grid_data.alt_max, grid_data.alt_min);
 	store_colors(&grid_data, grid);
 	mlx_data.mlx = mlx_init();
-	mlx_data.win = mlx_new_window(mlx_data.mlx, WIDTH, HEIGHT, map);
+	mlx_data.win = mlx_new_window(mlx_data.mlx, WIDTH, HEIGHT, argv[1]);
 	mlx_data.img.img = mlx_new_image(mlx_data.mlx, WIDTH, HEIGHT);
 	mlx_data.img.addr = mlx_get_data_addr(
 		mlx_data.img.img,
