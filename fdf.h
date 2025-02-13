@@ -91,8 +91,7 @@ void		fill_grid(t_pixel **grid, t_grid_data grid_data, int fd);
 // STORE_GRID_DATA
 void		store_max_alt(t_grid_data *grid_data, t_pixel **grid);
 void		store_colors(t_grid_data *grid_data, t_pixel **grid);
-void		store_iso_pos(
-				t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid);
+void		store_iso_pos(t_grid_data *grid_data, t_pixel **grid);
 void		store_pos_limits(t_grid_data *grid_data, t_pixel **grid);
 void		scale_limits(t_grid_data *grid_data, t_pixel **grid);
 void		store_spacing(t_grid_data *grid_data);

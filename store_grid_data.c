@@ -83,8 +83,7 @@ void	store_colors(t_grid_data *grid_data, t_pixel **grid)
 	}
 }
 
-void	store_iso_pos(
-	t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid)
+void	store_iso_pos(t_grid_data *grid_data, t_pixel **grid)
 {
 	int	r;
 	int	c;
