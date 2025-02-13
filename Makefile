@@ -14,7 +14,7 @@ MATH_FLAGS := -lm
 NAME := fdf
 
 HEADER := fdf.h
-SRC := test.c \
+SRC := fdf.c \
        free.c \
        error.c \
        utils.c \
