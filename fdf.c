@@ -64,16 +64,13 @@ static int	allocate_mlx(t_mlx_data *mlx_data, char *map)
 	mlx_data->win = mlx_new_window(mlx_data->mlx, WIDTH, HEIGHT, map);
 	if (mlx_data->win == NULL)
 	{
-		mlx_destroy_display(mlx_data->mlx);
-		free(mlx_data->mlx);
+		free_mlx(mlx_data);
 		return (-1);
 	}
 	mlx_data->img.img = mlx_new_image(mlx_data->mlx, WIDTH, HEIGHT);
 	if (mlx_data->img.img == NULL)
 	{
-		mlx_destroy_window(mlx_data->mlx, mlx_data->win);
-		mlx_destroy_display(mlx_data->mlx);
-		free(mlx_data->mlx);
+		free_mlx(mlx_data);
 		return (-1);
 	}
 	mlx_data->img.addr = mlx_get_data_addr(
@@ -92,13 +89,11 @@ int	main(int argc, char **argv)
 	t_pixel		**grid;
 
 	if (argc != 2)
-	{
-		ft_putendl_fd("missing map name argument", 2);
-		return (-1);
-	}
+		err_exit("missing map name argument");
 	grid_data = get_map_size(argv[1]);
 	grid = parse_map(argv[1], &grid_data);
-	allocate_mlx(&mlx_data, argv[1]);
+	if (allocate_mlx(&mlx_data, argv[1]) == -1)
+		err_freegrid_exit(grid, grid_data.height, "allocate_mlx() error");
 	draw_grid(&mlx_data.img, &grid_data, grid);
 	mlx_put_image_to_window(mlx_data.mlx, mlx_data.win, mlx_data.img.img, 0, 0);
 	mlx_hook(mlx_data.win, ON_DESTROY, 1L << 3, end_loop_mouse, &mlx_data);

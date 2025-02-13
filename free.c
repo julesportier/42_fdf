@@ -40,8 +40,13 @@ void	freegrid(t_pixel **grid, int sub_nbr)
 
 void	free_mlx(t_mlx_data *mlx_data)
 {
-	mlx_destroy_image(mlx_data->mlx, mlx_data->img.img);
-	mlx_destroy_window(mlx_data->mlx, mlx_data->win);
-	mlx_destroy_display(mlx_data->mlx);
-	free(mlx_data->mlx);
+	if (mlx_data->img.img != NULL)
+		mlx_destroy_image(mlx_data->mlx, mlx_data->img.img);
+	if (mlx_data->win != NULL)
+		mlx_destroy_window(mlx_data->mlx, mlx_data->win);
+	if (mlx_data->mlx != NULL)
+	{
+		mlx_destroy_display(mlx_data->mlx);
+		free(mlx_data->mlx);
+	}
 }

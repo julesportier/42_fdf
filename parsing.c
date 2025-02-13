@@ -24,16 +24,10 @@ int	get_fd(char *filename)
 
 	name_len = ft_strlen(filename);
 	if (name_len < 4 || ft_strncmp(&filename[name_len - 4], ".fdf", 4))
-	{
-		ft_putendl_fd("Wrong filename or extension", 2);
-		exit(EXIT_FAILURE);
-	}
+		err_exit("get_fd() error: Wrong filename or extension");
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-	{
-		perror("open() error");
-		exit(EXIT_FAILURE);
-	}
+		perror_exit("get_fd() error");
 	return (fd);
 }
 
@@ -51,16 +45,16 @@ t_grid_data	get_grid_size(int fd)
 		if (line == NULL && grid_data.width != 0)
 			return (grid_data);
 		if (line == NULL && grid_data.width == 0)
-			err_exit("file is empty");
+			err_exit("get_grid_size() error: file is empty");
 		if (++grid_data.height < 0)
-			err_free_exit(line, "line number overflow");
+			err_free_exit(line, "get_grid_size() error: line number overflow");
 		splits = ft_split(line, ' ');
 		if (splits == NULL)
-			err_free_exit(line, "ft_split() error");
+			err_free_exit(line, "get_grid_size() error: ft_split() error");
 		temp = splitlen(splits);
 		free_splits(splits);
 		if (temp != grid_data.width && grid_data.width != 0)
-			err_free_exit(line, "wrong file formating");
+			err_free_exit(line, "get_grid_size() error: wrong file formating");
 		grid_data.width = temp;
 		free(line);
 	}
@@ -74,7 +68,7 @@ t_pixel	**malloc_grid(t_grid_data *grid_data)
 	i = 0;
 	grid = malloc(grid_data->height * sizeof(t_pixel *));
 	if (grid == NULL)
-		perror("malloc() error");
+		perror_exit("malloc_grid() error");
 	while (i < grid_data->height)
 	{
 		grid[i] = malloc(grid_data->width * sizeof(t_pixel));
@@ -102,10 +96,7 @@ void	fill_grid(t_pixel **grid, t_grid_data *grid_data, int fd)
 		splits = ft_split(line, ' ');
 		free(line);
 		if (splits == NULL)
-		{
-			free_splits(splits);
-			err_exit("fill_grid() error");
-		}
+			err_freegrid_exit(grid, grid_data->height, "fill_grid() error");
 		c = -1;
 		while (++c < grid_data->width)
 			grid[r][c].z = ft_atoi(splits[c]);

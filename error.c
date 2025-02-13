@@ -12,11 +12,18 @@
 
 #include "fdf.h"
 #include "libft/libft.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 void	err_exit(char *error)
 {
 	ft_putendl_fd(error, 2);
+	exit(EXIT_FAILURE);
+}
+
+void	perror_exit(char *caller)
+{
+	perror(caller);
 	exit(EXIT_FAILURE);
 }
 

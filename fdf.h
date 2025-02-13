@@ -75,6 +75,7 @@ void		freegrid(t_pixel **grid, int sub_nbr);
 void		free_mlx(t_mlx_data *mlx_data);
 // ERROR
 void		err_exit(char *error);
+void		perror_exit(char *caller);
 void		err_free_exit(void *mem, char *error);
 void		err_freegrid_exit(t_pixel **mem, int sub_nbr, char *error);
 // UTILS
