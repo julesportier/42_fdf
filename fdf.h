@@ -86,8 +86,8 @@ int			end_loop_esc(int keycode, t_mlx_data *mlx_data);
 // PARSING
 t_grid_data	get_grid_size(int fd);
 int			get_fd(char *filename);
-t_pixel		**malloc_grid(t_grid_data grid_data);
-void		fill_grid(t_pixel **grid, t_grid_data grid_data, int fd);
+t_pixel		**malloc_grid(t_grid_data *grid_data);
+void		fill_grid(t_pixel **grid, t_grid_data *grid_data, int fd);
 // STORE_GRID_DATA
 void		store_max_alt(t_grid_data *grid_data, t_pixel **grid);
 void		store_colors(t_grid_data *grid_data, t_pixel **grid);

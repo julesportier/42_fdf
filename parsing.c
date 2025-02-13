@@ -66,27 +66,27 @@ t_grid_data	get_grid_size(int fd)
 	}
 }
 
-t_pixel	**malloc_grid(t_grid_data grid_data)
+t_pixel	**malloc_grid(t_grid_data *grid_data)
 {
 	t_pixel	**grid;
 	int		i;
 
 	i = 0;
-	grid = malloc(grid_data.height * sizeof(t_pixel *));
+	grid = malloc(grid_data->height * sizeof(t_pixel *));
 	if (grid == NULL)
 		perror("malloc() error");
-	while (i < grid_data.height)
+	while (i < grid_data->height)
 	{
-		grid[i] = malloc(grid_data.width * sizeof(t_pixel));
+		grid[i] = malloc(grid_data->width * sizeof(t_pixel));
 		if (grid[i] == NULL)
 			err_freegrid_exit(grid, i, "subarray malloc() failed");
-		ft_bzero(grid[i], grid_data.width * sizeof(t_pixel));
+		ft_bzero(grid[i], grid_data->width * sizeof(t_pixel));
 		i++;
 	}
 	return (grid);
 }
 
-void	fill_grid(t_pixel **grid, t_grid_data grid_data, int fd)
+void	fill_grid(t_pixel **grid, t_grid_data *grid_data, int fd)
 {
 	char	*line;
 	char	**splits;
@@ -94,11 +94,11 @@ void	fill_grid(t_pixel **grid, t_grid_data grid_data, int fd)
 	int		c;
 
 	r = 0;
-	while (r < grid_data.height)
+	while (r < grid_data->height)
 	{
 		line = remove_end_nl(get_next_line(fd));
 		if (line == NULL)
-			err_freegrid_exit(grid, grid_data.height, "fill_grid() error");
+			err_freegrid_exit(grid, grid_data->height, "fill_grid() error");
 		splits = ft_split(line, ' ');
 		free(line);
 		if (splits == NULL)
@@ -107,7 +107,7 @@ void	fill_grid(t_pixel **grid, t_grid_data grid_data, int fd)
 			err_exit("fill_grid() error");
 		}
 		c = -1;
-		while (++c < grid_data.width)
+		while (++c < grid_data->width)
 			grid[r][c].z = ft_atoi(splits[c]);
 		free_splits(splits);
 		r++;

@@ -37,8 +37,8 @@ static	t_pixel	**parse_map(char *map, t_grid_data *grid_data)
 	int		fd;
 
 	fd = get_fd(map);
-	grid = malloc_grid(*grid_data);
-	fill_grid(grid, *grid_data, fd);
+	grid = malloc_grid(grid_data);
+	fill_grid(grid, grid_data, fd);
 	close(fd);
 	store_max_alt(grid_data, grid);
 	ft_printf("grid max alt == %d\ngrid min alt == %d\n", grid_data->alt_max, grid_data->alt_min);
