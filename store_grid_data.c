@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 void	store_max_alt(t_grid_data *grid_data, t_pixel **grid)
 {
@@ -109,7 +108,6 @@ void	store_iso_pos(t_grid_data *grid_data, t_pixel **grid)
 					+ 0.41 * (x + y) - grid_data->y_min)
 				* grid_data->spacing
 				+ (HEIGHT - (float)HEIGHT * ZOOM) / 2;
-			printf("x == %d, y == %d, alt == %d, color == %x\n", grid[y][x].x, grid[y][x].y, grid[y][x].z, grid[y][x].color);
 			x++;
 		}
 		y++;

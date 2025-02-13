@@ -12,13 +12,13 @@
 
 #include "fdf.h"
 #include "minilibx/mlx.h"
-//#include "libft/libft.h"
 
 int	end_loop_mouse(t_mlx_data *mlx_data)
 {
 	mlx_loop_end(mlx_data->mlx);
 	return (0);
 }
+
 int	end_loop_esc(int keycode, t_mlx_data *mlx_data)
 {
 	if (keycode == ESC)

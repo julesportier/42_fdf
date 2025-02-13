@@ -50,8 +50,6 @@ typedef struct s_pixel
 	int		x;
 	int		y;
 	int		z;
-	float	ax;
-	float	ay;
 	int		color;
 }	t_pixel;
 
@@ -66,34 +64,33 @@ typedef struct s_grid_data
 	float		x_max;
 	float		x_min;
 	float		spacing;
-	t_pixel		start_point;
 }	t_grid_data;
 
-// FREE
+// free
 void		free_splits(char **array);
 void		freegrid(t_pixel **grid, int sub_nbr);
 void		free_mlx(t_mlx_data *mlx_data);
-// ERROR
+// error
 void		err_exit(char *error);
 void		perror_exit(char *caller);
 void		err_free_exit(void *mem, char *error);
 void		err_freegrid_exit(t_pixel **mem, int sub_nbr, char *error);
-// UTILS
+// utils
 int			splitlen(char **splits);
 char		*remove_end_nl(char *str);
-// MLX_UTILS
+// mlx_utils
 int			end_loop_mouse(t_mlx_data *mlx_data);
 int			end_loop_esc(int keycode, t_mlx_data *mlx_data);
-// PARSING
+// parsing
 t_grid_data	get_grid_size(int fd);
 int			get_fd(char *filename);
 t_pixel		**malloc_grid(t_grid_data *grid_data);
 void		fill_grid(t_pixel **grid, t_grid_data *grid_data, int fd);
-// STORE_GRID_DATA
+// store_grid_data
 void		store_max_alt(t_grid_data *grid_data, t_pixel **grid);
 void		store_spacing(t_grid_data *grid_data, t_pixel **grid);
 void		store_iso_pos(t_grid_data *grid_data, t_pixel **grid);
-// DRAW
+// draw
 void		draw_grid(
 				t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid);
 

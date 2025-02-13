@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   fdf.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juportie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,12 +11,8 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "libft/libft.h"
 #include "minilibx/mlx.h"
-//#include <math.h>
-#include "libft/ftpf_printf.h"
-//DEBUG
-#include <stdio.h>
+#include <unistd.h>
 
 static	t_grid_data	get_map_size(char *map)
 {
@@ -26,8 +22,6 @@ static	t_grid_data	get_map_size(char *map)
 	fd = get_fd(map);
 	grid_data = get_grid_size(fd);
 	close(fd);
-	//ft_printf("grid_data.width == %d\n", grid_data.width);
-	//ft_printf("grid_data.height == %d\n", grid_data.height);
 	return (grid_data);
 }
 
@@ -41,11 +35,7 @@ static	t_pixel	**parse_map(char *map, t_grid_data *grid_data)
 	fill_grid(grid, grid_data, fd);
 	close(fd);
 	store_max_alt(grid_data, grid);
-	ft_printf("grid max alt == %d\ngrid min alt == %d\n", grid_data->alt_max, grid_data->alt_min);
 	store_spacing(grid_data, grid);
-	printf("grid max y == %f, grid max x == %f\n", grid_data->y_max, grid_data->x_max);
-	printf("grid min y == %f, grid min x == %f\n", grid_data->y_min, grid_data->x_min);
-	printf("grid spacing == %f\n", grid_data->spacing);
 	store_iso_pos(grid_data, grid);
 	return (grid);
 }
@@ -93,7 +83,6 @@ int	main(int argc, char **argv)
 	mlx_hook(mlx_data.win, ON_DESTROY, 1L << 3, end_loop_mouse, &mlx_data);
 	mlx_key_hook(mlx_data.win, end_loop_esc, &mlx_data);
 	mlx_loop(mlx_data.mlx);
-	printf("end loop\n");
 	free_mlx(&mlx_data);
 	freegrid(grid, grid_data.height);
 	return (0);
