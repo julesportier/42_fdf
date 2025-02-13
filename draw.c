@@ -13,7 +13,7 @@
 #include "fdf.h"
 #include <math.h>
 
-void	put_pixel(t_img_data *img_data, t_pixel pixel)
+static void	put_pixel(t_img_data *img_data, t_pixel pixel)
 {
 	char	*pix_addr;
 
@@ -46,7 +46,7 @@ static int	interpolate_color(t_pixel *pix_a, int color_b, int step_nbr, int i)
 	return (color);
 }
 
-void	draw_line(t_img_data *img_data, t_pixel pix_a, t_pixel pix_b)
+static void	draw_line(t_img_data *img_data, t_pixel pix_a, t_pixel pix_b)
 {
 	int		step_nbr;
 	double	x_step;
