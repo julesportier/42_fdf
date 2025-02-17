@@ -40,9 +40,9 @@ typedef struct s_img_data
 
 typedef struct s_mlx_data
 {
-	void	*mlx;
-	void	*win;
-	t_img_data img;
+	void		*mlx;
+	void		*win;
+	t_img_data	img;
 }	t_mlx_data;
 
 typedef struct s_pixel
