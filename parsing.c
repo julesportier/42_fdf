@@ -75,7 +75,8 @@ t_pixel	**malloc_grid(t_grid_data *grid_data)
 	{
 		grid[i] = malloc(grid_data->width * sizeof(t_pixel));
 		if (grid[i] == NULL)
-			err_freegrid_exit(grid, i, "subarray malloc() failed");
+			err_freegrid_exit(grid, i,
+				"malloc_grid() error: subarray malloc failed");
 		ft_bzero(grid[i], grid_data->width * sizeof(t_pixel));
 		i++;
 	}
