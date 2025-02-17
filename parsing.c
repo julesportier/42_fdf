@@ -65,6 +65,8 @@ t_pixel	**malloc_grid(t_grid_data *grid_data)
 	t_pixel	**grid;
 	int		i;
 
+	if (grid_data->height == 1 && grid_data->width == 1)
+		err_exit("map to small");
 	i = 0;
 	grid = malloc(grid_data->height * sizeof(t_pixel *));
 	if (grid == NULL)
