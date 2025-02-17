@@ -14,15 +14,27 @@
 #include "libft/libft.h"
 #include <stdlib.h>
 
-int	splitlen(char **splits)
+int	split_digit_len(char **splits)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	if (splits != NULL)
 	{
 		while (splits[i])
+		{
+			j = 0;
+			while (splits[i][j] && splits[i][j] != ',')
+			{
+				if (splits[i][j] >= '0' && splits[i][j] <= '9'
+					|| splits [i][j] == '-')
+					j++;
+				else
+					return (-1);
+			}
 			i++;
+		}
 	}
 	return (i);
 }

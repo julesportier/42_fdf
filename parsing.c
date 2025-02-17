@@ -51,7 +51,7 @@ t_grid_data	get_grid_size(int fd)
 		splits = ft_split(line, ' ');
 		if (splits == NULL)
 			err_free_exit(line, "get_grid_size() error: ft_split() error");
-		temp = splitlen(splits);
+		temp = split_digit_len(splits);
 		free_splits(splits);
 		if (temp != grid_data.width && grid_data.width != 0)
 			err_free_exit(line, "get_grid_size() error: wrong file formating");

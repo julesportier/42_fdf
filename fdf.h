@@ -76,7 +76,7 @@ void		perror_exit(char *caller);
 void		err_free_exit(void *mem, char *error);
 void		err_freegrid_exit(t_pixel **mem, int sub_nbr, char *error);
 // utils
-int			splitlen(char **splits);
+int			split_digit_len(char **splits);
 char		*remove_end_nl(char *str);
 // mlx_utils
 int			end_loop_mouse(t_mlx_data *mlx_data);
