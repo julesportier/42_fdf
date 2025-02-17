@@ -25,13 +25,13 @@ SRC := fdf.c \
 OBJ := $(SRC:%.c=%.o)
 
 
-all: libft mlx $(NAME)
+all: ft mlx $(NAME)
 
 no_error: CFLAGS = $(CFLAGS_NE)
 no_error: all
 debug: CFLAGS = $(CFLAGS_DB)
 debug: all
-libft:
+ft:
 	make -C $(LIBFT_DIR)
 mlx:
 	make -C $(LIBMLX_DIR)
@@ -57,4 +57,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all libft mlx clean fclean re no_error debug
+.PHONY: all ft mlx clean fclean re no_error debug
