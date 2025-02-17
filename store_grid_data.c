@@ -33,6 +33,8 @@ void	store_max_alt(t_grid_data *grid_data, t_pixel **grid)
 		}
 		y++;
 	}
+	if (grid_data->alt_max == grid_data->alt_min)
+		grid_data->alt_max++;
 }
 
 void	store_spacing(t_grid_data *grid_data, t_pixel **grid)
