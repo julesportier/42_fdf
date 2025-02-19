@@ -73,8 +73,8 @@ void		free_mlx(t_mlx_data *mlx_data);
 // error
 void		err_exit(char *error);
 void		perror_exit(char *caller);
-void		err_free_exit(void *mem, char *error);
-void		err_freegrid_exit(t_pixel **mem, int sub_nbr, char *error);
+void		err_free_exit(int fd, void *mem, char *error);
+void		err_freegrid_exit(int fd, t_pixel **mem, int sub_nbr, char *error);
 // utils
 int			split_digit_len(char **splits);
 char		*remove_end_nl(char *str);

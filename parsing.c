@@ -45,16 +45,16 @@ t_grid_data	get_grid_size(int fd)
 		if (line == NULL && grid_data.width != 0)
 			return (grid_data);
 		if (line == NULL && grid_data.width == 0)
-			err_exit("get_grid_size() error: file is empty");
+			err_free_exit(fd, NULL, "get_grid_size() error: file is empty");
 		if (++grid_data.height < 0)
-			err_free_exit(line, "get_grid_size() error: line number overflow");
+			err_free_exit(fd, line, "get_grid_size() error: line number overflow");
 		splits = ft_split(line, ' ');
 		if (splits == NULL)
-			err_free_exit(line, "get_grid_size() error: ft_split() error");
+			err_free_exit(fd, line, "get_grid_size() error: ft_split() error");
 		temp = split_digit_len(splits);
 		free_splits(splits);
 		if (temp != grid_data.width && grid_data.width != 0 || temp < 0)
-			err_free_exit(line, "get_grid_size() error: wrong file formating");
+			err_free_exit(fd, line, "get_grid_size() error: wrong file formating");
 		grid_data.width = temp;
 		free(line);
 	}
@@ -75,7 +75,7 @@ t_pixel	**malloc_grid(t_grid_data *grid_data)
 	{
 		grid[i] = malloc(grid_data->width * sizeof(t_pixel));
 		if (grid[i] == NULL)
-			err_freegrid_exit(grid, i,
+			err_freegrid_exit(-1, grid, i,
 				"malloc_grid() error: subarray malloc failed");
 		ft_bzero(grid[i], grid_data->width * sizeof(t_pixel));
 		i++;
@@ -95,11 +95,11 @@ void	fill_grid(t_pixel **grid, t_grid_data *grid_data, int fd)
 	{
 		line = remove_end_nl(get_next_line(fd));
 		if (line == NULL)
-			err_freegrid_exit(grid, grid_data->height, "fill_grid() error");
+			err_freegrid_exit(fd, grid, grid_data->height, "fill_grid() error");
 		splits = ft_split(line, ' ');
 		free(line);
 		if (splits == NULL)
-			err_freegrid_exit(grid, grid_data->height, "fill_grid() error");
+			err_freegrid_exit(fd, grid, grid_data->height, "fill_grid() error");
 		c = -1;
 		while (++c < grid_data->width)
 			grid[r][c].z = ft_atoi(splits[c]);

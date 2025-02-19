@@ -27,15 +27,20 @@ void	perror_exit(char *caller)
 	exit(EXIT_FAILURE);
 }
 
-void	err_free_exit(void *mem, char *error)
+void	err_free_exit(int fd, void *mem, char *error)
 {
-	free(mem);
+	if (fd > 0)
+		close(fd);
+	if (mem)
+		free(mem);
 	ft_putendl_fd(error, 2);
 	exit(EXIT_FAILURE);
 }
 
-void	err_freegrid_exit(t_pixel **grid, int sub_nbr, char *error)
+void	err_freegrid_exit(int fd, t_pixel **grid, int sub_nbr, char *error)
 {
+	if (fd > 0)
+		close(fd);
 	freegrid(grid, sub_nbr);
 	ft_putendl_fd(error, 2);
 	exit(EXIT_FAILURE);
