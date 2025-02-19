@@ -24,6 +24,8 @@ int	split_digit_len(char **splits)
 	{
 		while (splits[i])
 		{
+			if (splits[i][0] == ',')
+				return (-1);
 			j = 0;
 			while (splits[i][j] && splits[i][j] != ',')
 			{
