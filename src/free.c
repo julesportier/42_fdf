@@ -12,7 +12,7 @@
 
 #include "fdf.h"
 #include <stdlib.h>
-#include "minilibx/mlx.h"
+#include "../minilibx/mlx.h"
 
 void	free_splits(char **array)
 {

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "minilibx/mlx.h"
+#include "../minilibx/mlx.h"
 #include <unistd.h>
 
 static	t_grid_data	get_map_size(char *map)

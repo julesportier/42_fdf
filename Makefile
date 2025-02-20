@@ -13,7 +13,10 @@ MATH_FLAGS := -lm
 
 NAME := fdf
 
+SRC_DIR := src
+vpath %.h $(SRC_DIR)
 HEADER := fdf.h
+vpath %.c $(SRC_DIR)
 SRC := fdf.c \
        free.c \
        error.c \
@@ -22,39 +25,46 @@ SRC := fdf.c \
        parsing.c \
        store_grid_data.c \
        draw.c
-OBJ := $(SRC:%.c=%.o)
+OBJ_DIR := build
+OBJ := $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 
-all: ft mlx $(NAME)
+all: ft mlx $(OBJ_DIR) $(NAME)
 
-no_error: CFLAGS = $(CFLAGS_NE)
-no_error: all
-debug: CFLAGS = $(CFLAGS_DB)
-debug: all
+noerr: CFLAGS = $(CFLAGS_NE)
+noerr: all
+
+dbg: CFLAGS = $(CFLAGS_DB)
+dbg: all
+
 ft:
 	make -C $(LIBFT_DIR)
 mlx:
 	make -C $(LIBMLX_DIR)
 
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@ $(LIBFT_FLAGS) $(LIBMLX_FLAGS) $(MATH_FLAGS)
 
-%.o: %.c Makefile $(HEADER) $(LIBFT_AR) $(LIBMLX_AR)
+$(OBJ_DIR)/%.o: %.c Makefile $(HEADER) $(LIBFT_AR) $(LIBMLX_AR)
 	$(CC) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	-rm $(OBJ)
+	-rm -r $(OBJ_DIR)
 	make clean -C $(LIBFT_DIR)
-	rm -rf $(LIBMLX_DIR)/obj
-	rm -f $(LIBMLX_DIR)/test/main.o
+	-rm -r $(LIBMLX_DIR)/obj
+	-rm $(LIBMLX_DIR)/test/main.o
 
 fclean: clean
-	rm -f $(NAME)
+	-rm $(NAME)
 	make fclean -C $(LIBFT_DIR)
 	make clean -C $(LIBMLX_DIR)
-	rm -f $(LIBMLX_DIR)/Makefile.gen
-	rm -f $(LIBMLX_DIR)/test/Makefile.gen
+	-rm $(LIBMLX_DIR)/Makefile.gen
+	-rm $(LIBMLX_DIR)/test/Makefile.gen
 
 re: fclean all
 
-.PHONY: all ft mlx clean fclean re no_error debug
+.PHONY: all ft mlx clean fclean re noerr dbg
