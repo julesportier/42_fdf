@@ -24,10 +24,10 @@ int	get_fd(char *filename)
 
 	name_len = ft_strlen(filename);
 	if (name_len < 4 || ft_strncmp(&filename[name_len - 4], ".fdf", 4))
-		err_exit("get_fd() error: Wrong filename or extension");
+		err_exit("get_fd(): Wrong filename or extension");
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		perror_exit("get_fd() error");
+		perror_exit("get_fd()");
 	return (fd);
 }
 
@@ -45,16 +45,16 @@ t_grid_data	get_grid_size(int fd)
 		if (line == NULL && grid_data.width != 0)
 			return (grid_data);
 		if (line == NULL && grid_data.width == 0)
-			err_free_exit(fd, NULL, "get_grid_size() error: file is empty");
+			err_free_exit(fd, NULL, "get_grid_size(): file is empty");
 		if (++grid_data.height < 0)
-			err_free_exit(fd, line, "get_grid_size() error: line number overflow");
+			err_free_exit(fd, line, "get_grid_size(): line number overflow");
 		splits = ft_split(line, ' ');
 		if (splits == NULL)
-			err_free_exit(fd, line, "get_grid_size() error: ft_split() error");
+			err_free_exit(fd, line, "get_grid_size(): ft_split() error");
 		temp = split_digit_len(splits);
 		free_splits(splits);
 		if (temp != grid_data.width && grid_data.width != 0 || temp < 0)
-			err_free_exit(fd, line, "get_grid_size() error: wrong file formating");
+			err_free_exit(fd, line, "get_grid_size(): wrong file formating");
 		grid_data.width = temp;
 		free(line);
 	}
@@ -66,21 +66,33 @@ t_pixel	**malloc_grid(t_grid_data *grid_data)
 	int		i;
 
 	if (grid_data->height == 1 && grid_data->width == 1)
-		err_exit("map to small");
+		err_exit("malloc_grid(): map to small");
 	i = 0;
 	grid = malloc(grid_data->height * sizeof(t_pixel *));
 	if (grid == NULL)
-		perror_exit("malloc_grid() error");
+		perror_exit("malloc_grid()");
 	while (i < grid_data->height)
 	{
 		grid[i] = malloc(grid_data->width * sizeof(t_pixel));
 		if (grid[i] == NULL)
 			err_freegrid_exit(-1, grid, i,
-				"malloc_grid() error: subarray malloc failed");
+				"malloc_grid(): subarray malloc failed");
 		ft_bzero(grid[i], grid_data->width * sizeof(t_pixel));
 		i++;
 	}
 	return (grid);
+}
+
+static void	parse_cell(char *cell, t_pixel *pixel)
+{
+	char	*hexptr;
+
+	pixel->z = ft_atoi(cell);
+	hexptr = ft_strnstr(cell, ",0x", ft_strlen(cell));
+	if (hexptr != NULL)
+		pixel->color = ft_uhextoui(hexptr + 3);
+	else
+		pixel->color = 0;
 }
 
 void	fill_grid(t_pixel **grid, t_grid_data *grid_data, int fd)
@@ -102,7 +114,7 @@ void	fill_grid(t_pixel **grid, t_grid_data *grid_data, int fd)
 			err_freegrid_exit(fd, grid, grid_data->height, "fill_grid() error");
 		c = -1;
 		while (++c < grid_data->width)
-			grid[r][c].z = ft_atoi(splits[c]);
+			parse_cell(splits[c], &grid[r][c]);
 		free_splits(splits);
 		r++;
 	}

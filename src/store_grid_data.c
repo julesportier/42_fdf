@@ -100,7 +100,8 @@ void	store_iso_pos(t_grid_data *grid_data, t_pixel **grid)
 		x = 0;
 		while (x < grid_data->width)
 		{
-			get_color(grid_data, &grid[y][x]);
+			if (grid[y][x].color == 0)
+				get_color(grid_data, &grid[y][x]);
 			grid[y][x].x = (float)((x - y) * 0.71 - grid_data->x_min)
 				*grid_data->spacing + (WIDTH - (float)WIDTH * ZOOM) / 2;
 			grid[y][x].y = (-0.82 * ((float)grid[y][x].z / (
