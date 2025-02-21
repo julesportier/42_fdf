@@ -52,18 +52,17 @@ $(OBJ_DIR)/%.o: %.c Makefile $(HEADER) $(LIBFT_AR) $(LIBMLX_AR)
 	$(CC) -c $< -o $@
 
 clean:
-	-rm $(OBJ)
-	-rm -r $(OBJ_DIR)
+	rm -rf $(OBJ_DIR)
 	make clean -C $(LIBFT_DIR)
-	-rm -r $(LIBMLX_DIR)/obj
-	-rm $(LIBMLX_DIR)/test/main.o
+	rm -rf $(LIBMLX_DIR)/obj
+	rm -f $(LIBMLX_DIR)/test/main.o
 
 fclean: clean
-	-rm $(NAME)
+	rm -f $(NAME)
 	make fclean -C $(LIBFT_DIR)
 	make clean -C $(LIBMLX_DIR)
-	-rm $(LIBMLX_DIR)/Makefile.gen
-	-rm $(LIBMLX_DIR)/test/Makefile.gen
+	rm -f $(LIBMLX_DIR)/Makefile.gen
+	rm -f $(LIBMLX_DIR)/test/Makefile.gen
 
 re: fclean all
 
