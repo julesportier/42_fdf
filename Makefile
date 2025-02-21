@@ -29,7 +29,7 @@ OBJ_DIR := build
 OBJ := $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 
-all: ft mlx $(OBJ_DIR) $(NAME)
+all: $(OBJ_DIR) ft mlx $(NAME)
 
 noerr: CFLAGS = $(CFLAGS_NE)
 noerr: all
@@ -43,6 +43,7 @@ mlx:
 	make -C $(LIBMLX_DIR)
 
 $(OBJ_DIR):
+	git submodule update --init
 	mkdir -p $(OBJ_DIR)
 
 $(NAME): $(OBJ)
