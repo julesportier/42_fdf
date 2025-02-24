@@ -29,19 +29,21 @@ void	perror_exit(char *caller)
 
 void	err_free_exit(int fd, void *mem, char *error)
 {
-	if (fd > 0)
-		close(fd);
 	if (mem)
 		free(mem);
 	ft_putendl_fd(error, 2);
+	if (fd > 0)
+		if (close(fd))
+			perror("err_free_exit");
 	exit(EXIT_FAILURE);
 }
 
 void	err_freegrid_exit(int fd, t_pixel **grid, int sub_nbr, char *error)
 {
-	if (fd > 0)
-		close(fd);
 	freegrid(grid, sub_nbr);
 	ft_putendl_fd(error, 2);
+	if (fd > 0)
+		if (close(fd))
+			perror("err_free_exit");
 	exit(EXIT_FAILURE);
 }

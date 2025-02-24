@@ -12,6 +12,8 @@
 
 #include "fdf.h"
 #include "../minilibx/mlx.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 
 static	t_grid_data	get_map_size(char *map)
@@ -21,7 +23,8 @@ static	t_grid_data	get_map_size(char *map)
 
 	fd = get_fd(map);
 	grid_data = get_grid_size(fd);
-	close(fd);
+	if (close(fd))
+		perror_exit("get_map_size()");
 	return (grid_data);
 }
 
@@ -33,7 +36,12 @@ static	t_pixel	**parse_map(char *map, t_grid_data *grid_data)
 	grid = malloc_grid(grid_data);
 	fd = get_fd(map);
 	fill_grid(grid, grid_data, fd);
-	close(fd);
+	if (close(fd))
+	{
+		perror("parse_map()");
+		freegrid(grid, grid_data->height);
+		exit(EXIT_FAILURE);
+	}
 	store_max_alt(grid_data, grid);
 	store_spacing(grid_data, grid);
 	store_iso_pos(grid_data, grid);
