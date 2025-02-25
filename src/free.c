@@ -31,10 +31,16 @@ void	free_splits(char **array)
 	array = NULL;
 }
 
-void	freegrid(t_pixel **grid, int sub_nbr)
+void	freegrid(t_pixel **grid)
 {
-	while (sub_nbr--)
-		free(grid[sub_nbr]);
+	int	i;
+
+	i = 0;
+	while (grid[i])
+	{
+		free(grid[i]);
+		i++;
+	}
 	free(grid);
 }
 

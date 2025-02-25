@@ -39,7 +39,7 @@ static	t_pixel	**parse_map(char *map, t_grid_data *grid_data)
 	if (close(fd))
 	{
 		perror("parse_map()");
-		freegrid(grid, grid_data->height);
+		freegrid(grid);
 		exit(EXIT_FAILURE);
 	}
 	store_max_alt(grid_data, grid);
@@ -87,13 +87,13 @@ int	main(int argc, char **argv)
 	grid_data = get_map_size(argv[1]);
 	grid = parse_map(argv[1], &grid_data);
 	if (allocate_mlx(&mlx_data, argv[1]) == -1)
-		err_freegrid_exit(-1, grid, grid_data.height, "allocate_mlx() error");
+		err_freegrid_exit(-1, grid, "allocate_mlx() error");
 	draw_grid(&mlx_data.img, &grid_data, grid);
 	mlx_put_image_to_window(mlx_data.mlx, mlx_data.win, mlx_data.img.img, 0, 0);
 	mlx_hook(mlx_data.win, ON_DESTROY, 1L << 3, end_loop_mouse, &mlx_data);
 	mlx_key_hook(mlx_data.win, end_loop_esc, &mlx_data);
 	mlx_loop(mlx_data.mlx);
 	free_mlx(&mlx_data);
-	freegrid(grid, grid_data.height);
+	freegrid(grid);
 	return (0);
 }

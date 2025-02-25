@@ -17,6 +17,8 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 # define ZOOM 0.7
+// map alt bound
+# define ALT_LIMIT 1000000000
 // colors for extreme altitudes
 # define COLOR_H 0x00FFFF00
 # define COLOR_M 0x00FF7000
@@ -68,13 +70,15 @@ typedef struct s_grid_data
 
 // free
 void		free_splits(char **array);
-void		freegrid(t_pixel **grid, int sub_nbr);
+void		freegrid(t_pixel **grid);
 void		free_mlx(t_mlx_data *mlx_data);
 // error
 void		err_exit(char *error);
 void		perror_exit(char *caller);
 void		err_free_exit(int fd, void *mem, char *error);
-void		err_freegrid_exit(int fd, t_pixel **mem, int sub_nbr, char *error);
+void		err_freegrid_exit(int fd, t_pixel **mem, char *error);
+void		err_freeall_exit(
+				int fd, t_pixel **grid, char **splits, char *error);
 // utils
 int			split_digit_len(char **splits);
 char		*remove_end_nl(char *str);

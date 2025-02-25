@@ -35,7 +35,8 @@ int	split_digit_len(char **splits)
 				else
 					return (-1);
 			}
-			i++;
+			if (++i < 0)
+				return (-1);
 		}
 	}
 	return (i);

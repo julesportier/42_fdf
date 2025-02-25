@@ -20,7 +20,7 @@ void	store_max_alt(t_grid_data *grid_data, t_pixel **grid)
 	y = 0;
 	grid_data->alt_max = grid[0][0].z;
 	grid_data->alt_min = grid[0][0].z;
-	while (y < grid_data->height)
+	while (grid[y])
 	{
 		x = 0;
 		while (x < grid_data->width)
@@ -95,7 +95,7 @@ void	store_iso_pos(t_grid_data *grid_data, t_pixel **grid)
 	int	x;
 
 	y = 0;
-	while (y < grid_data->height)
+	while (grid[y])
 	{
 		x = 0;
 		while (x < grid_data->width)

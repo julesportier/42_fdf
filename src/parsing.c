@@ -67,31 +67,35 @@ t_pixel	**malloc_grid(t_grid_data *grid_data)
 	if (grid_data->height == 1 && grid_data->width == 1)
 		err_exit("malloc_grid(): map to small");
 	i = 0;
-	grid = malloc(grid_data->height * sizeof(t_pixel *));
+	grid = malloc((grid_data->height + 1) * sizeof(t_pixel *));
 	if (grid == NULL)
 		perror_exit("malloc_grid()");
 	while (i < grid_data->height)
 	{
 		grid[i] = malloc(grid_data->width * sizeof(t_pixel));
 		if (grid[i] == NULL)
-			err_freegrid_exit(-1, grid, i,
+			err_freegrid_exit(-1, grid,
 				"malloc_grid(): subarray malloc failed");
 		ft_bzero(grid[i], grid_data->width * sizeof(t_pixel));
 		i++;
 	}
+	grid[i] = NULL;
 	return (grid);
 }
 
-static void	parse_cell(char *cell, t_pixel *pixel)
+static int	parse_cell(char *cell, t_pixel *pixel)
 {
 	char	*hexptr;
 
-	pixel->z = ft_atoi(cell);
+	pixel->z = ft_atoi_sat(cell);
+	if (pixel->z > ALT_LIMIT || pixel->z < -ALT_LIMIT)
+		return (-1);
 	hexptr = ft_strnstr(cell, ",0x", ft_strlen(cell));
 	if (hexptr != NULL)
 		pixel->color = ft_uhextoui(hexptr + 3);
 	else
 		pixel->color = 0;
+	return (0);
 }
 
 void	fill_grid(t_pixel **grid, t_grid_data *grid_data, int fd)
@@ -101,20 +105,21 @@ void	fill_grid(t_pixel **grid, t_grid_data *grid_data, int fd)
 	int		r;
 	int		c;
 
-	r = 0;
-	while (r < grid_data->height)
+	r = -1;
+	while (grid[++r])
 	{
 		line = remove_end_nl(get_next_line(fd));
 		if (line == NULL)
-			err_freegrid_exit(fd, grid, grid_data->height, "fill_grid() error");
+			err_freegrid_exit(fd, grid, "fill_grid() error");
 		splits = ft_split(line, ' ');
 		free(line);
 		if (splits == NULL)
-			err_freegrid_exit(fd, grid, grid_data->height, "fill_grid() error");
+			err_freegrid_exit(fd, grid, "fill_grid() error");
 		c = -1;
 		while (++c < grid_data->width)
-			parse_cell(splits[c], &grid[r][c]);
+			if (parse_cell(splits[c], &grid[r][c]))
+				err_freeall_exit(fd, grid, splits,
+					"fill_grid() error: alt out of bounds");
 		free_splits(splits);
-		r++;
 	}
 }

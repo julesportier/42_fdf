@@ -84,7 +84,7 @@ void	draw_grid(t_img_data *img_data, t_grid_data *grid_data, t_pixel **grid)
 	t_pixel	pixel;
 
 	y = 0;
-	while (y < grid_data->height)
+	while (grid[y])
 	{
 		x = 0;
 		while (x < grid_data->width)

@@ -38,9 +38,20 @@ void	err_free_exit(int fd, void *mem, char *error)
 	exit(EXIT_FAILURE);
 }
 
-void	err_freegrid_exit(int fd, t_pixel **grid, int sub_nbr, char *error)
+void	err_freegrid_exit(int fd, t_pixel **grid, char *error)
 {
-	freegrid(grid, sub_nbr);
+	freegrid(grid);
+	ft_putendl_fd(error, 2);
+	if (fd > 0)
+		if (close(fd))
+			perror("err_free_exit");
+	exit(EXIT_FAILURE);
+}
+
+void	err_freeall_exit(int fd, t_pixel **grid, char **splits, char *error)
+{
+	free_splits(splits);
+	freegrid(grid);
 	ft_putendl_fd(error, 2);
 	if (fd > 0)
 		if (close(fd))
