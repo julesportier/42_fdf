@@ -17,6 +17,8 @@ static void	put_pixel(t_img_data *img_data, t_pixel pixel)
 {
 	char	*pix_addr;
 
+	if (pixel.y > HEIGHT || pixel.y < 0 || pixel.x > WIDTH || pixel.x < 0)
+		return ;
 	pix_addr = img_data->addr + (
 			pixel.y * img_data->line_length
 			+ pixel.x * (img_data->bits_per_pixel / 8)
