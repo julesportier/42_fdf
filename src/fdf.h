@@ -59,11 +59,11 @@ typedef struct s_grid_data
 	int			height;
 	int			alt_max;
 	int			alt_min;
-	float		y_max;
-	float		y_min;
-	float		x_max;
-	float		x_min;
-	float		spacing;
+	double		y_max;
+	double		y_min;
+	double		x_max;
+	double		x_min;
+	double		spacing;
 }	t_grid_data;
 
 // free

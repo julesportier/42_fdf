@@ -40,7 +40,7 @@ static int	interpolate_color(t_pixel *pix_a, int color_b, int step_nbr, int i)
 	{
 		tmp_b = color_b & mask;
 		tmp_a = pix_a->color & mask;
-		color |= (int)((tmp_b - tmp_a) * ((float)i / step_nbr) + tmp_a) & mask;
+		color |= (int)((tmp_b - tmp_a) * ((double)i / step_nbr) + tmp_a) & mask;
 		mask = mask << 8;
 	}
 	return (color);
@@ -68,8 +68,8 @@ static void	draw_line(t_img_data *img_data, t_pixel pix_a, t_pixel pix_b)
 	i = -1;
 	while (++i <= step_nbr)
 	{
-		pix_b.x = roundf(pix_a.x + i * x_step);
-		pix_b.y = roundf(pix_a.y + i * y_step);
+		pix_b.x = round(pix_a.x + i * x_step);
+		pix_b.y = round(pix_a.y + i * y_step);
 		pix_b.color = interpolate_color(&pix_a, color_b, step_nbr, i);
 		put_pixel(img_data, pix_b);
 	}
